@@ -19,7 +19,7 @@ entity TOP_Accelerator is
 		reset      : in  std_logic;                       -- Reset signal
 		IN_read    : in  std_logic;                       -- Read signal
 		IN_load    : in  std_logic;                       -- Start loading data signal
-		IN_data_in : in  std_logic_vector(15 downto 0);   -- Input data to set
+		IN_data_in : in  std_logic_vector(255 downto 0);   -- Input data to set
 		IN_matrix_sel : in std_logic_vector(3 downto 0);  -- Result matrix index
 		OUT_data_out : out std_logic_vector(15 downto 0);  -- Output data
 		finish     : out std_logic
