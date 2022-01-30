@@ -1,0 +1,192 @@
+#-----------------------------------------------------------
+# Vivado v2021.1.1 (64-bit)
+# SW Build 3286242 on Wed Jul 28 13:09:46 MDT 2021
+# IP Build 3279568 on Wed Jul 28 16:48:48 MDT 2021
+# Start of session at: Sun Jan 30 15:20:12 2022
+# Process ID: 33378
+# Current directory: /home/dell/Documents/Vivado/ICP_accelerator/ICP_accelerator.runs/synth_1
+# Command line: vivado -log TOP_Accelerator.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source TOP_Accelerator.tcl
+# Log file: /home/dell/Documents/Vivado/ICP_accelerator/ICP_accelerator.runs/synth_1/TOP_Accelerator.vds
+# Journal file: /home/dell/Documents/Vivado/ICP_accelerator/ICP_accelerator.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source TOP_Accelerator.tcl -notrace
+Command: synth_design -top TOP_Accelerator -part xc7k70tfbv676-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 33511
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2475.402 ; gain = 0.000 ; free physical = 4376 ; free virtual = 11454
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'TOP_Accelerator' [/home/dell/Documents/Vivado/ICP_accelerator/code/source/TOP_Accelerator.vhd:29]
+INFO: [Synth 8-3491] module 'Controller' declared at '/home/dell/Documents/Vivado/ICP_accelerator/code/source/Controller.vhd:26' bound to instance 'controller_inst' of component 'Controller' [/home/dell/Documents/Vivado/ICP_accelerator/code/source/TOP_Accelerator.vhd:74]
+INFO: [Synth 8-638] synthesizing module 'Controller' [/home/dell/Documents/Vivado/ICP_accelerator/code/source/Controller.vhd:42]
+WARNING: [Synth 8-614] signal 'state_cur' is read in the process but is not in the sensitivity list [/home/dell/Documents/Vivado/ICP_accelerator/code/source/Controller.vhd:76]
+WARNING: [Synth 8-614] signal 'loading_cur' is read in the process but is not in the sensitivity list [/home/dell/Documents/Vivado/ICP_accelerator/code/source/Controller.vhd:76]
+WARNING: [Synth 8-614] signal 'IN_read' is read in the process but is not in the sensitivity list [/home/dell/Documents/Vivado/ICP_accelerator/code/source/Controller.vhd:76]
+WARNING: [Synth 8-614] signal 'IN_load' is read in the process but is not in the sensitivity list [/home/dell/Documents/Vivado/ICP_accelerator/code/source/Controller.vhd:76]
+INFO: [Synth 8-256] done synthesizing module 'Controller' (1#1) [/home/dell/Documents/Vivado/ICP_accelerator/code/source/Controller.vhd:42]
+INFO: [Synth 8-3491] module 'MAC' declared at '/home/dell/Documents/Vivado/ICP_accelerator/code/source/MAC.vhd:9' bound to instance 'mac_inst' of component 'MAC' [/home/dell/Documents/Vivado/ICP_accelerator/code/source/TOP_Accelerator.vhd:87]
+INFO: [Synth 8-638] synthesizing module 'MAC' [/home/dell/Documents/Vivado/ICP_accelerator/code/source/MAC.vhd:20]
+WARNING: [Synth 8-614] signal 'mul0' is read in the process but is not in the sensitivity list [/home/dell/Documents/Vivado/ICP_accelerator/code/source/MAC.vhd:46]
+WARNING: [Synth 8-614] signal 'mul1' is read in the process but is not in the sensitivity list [/home/dell/Documents/Vivado/ICP_accelerator/code/source/MAC.vhd:46]
+WARNING: [Synth 8-614] signal 'sum0' is read in the process but is not in the sensitivity list [/home/dell/Documents/Vivado/ICP_accelerator/code/source/MAC.vhd:46]
+WARNING: [Synth 8-614] signal 'mac' is read in the process but is not in the sensitivity list [/home/dell/Documents/Vivado/ICP_accelerator/code/source/MAC.vhd:46]
+INFO: [Synth 8-256] done synthesizing module 'MAC' (2#1) [/home/dell/Documents/Vivado/ICP_accelerator/code/source/MAC.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'TOP_Accelerator' (3#1) [/home/dell/Documents/Vivado/ICP_accelerator/code/source/TOP_Accelerator.vhd:29]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2475.402 ; gain = 0.000 ; free physical = 3523 ; free virtual = 10600
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2475.402 ; gain = 0.000 ; free physical = 3527 ; free virtual = 10608
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7k70tfbv676-1
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7k70tfbv676-1
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 3526 ; free virtual = 10607
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-327] inferring latch for variable 'finished_reg' [/home/dell/Documents/Vivado/ICP_accelerator/code/source/Controller.vhd:89]
+WARNING: [Synth 8-327] inferring latch for variable 'addr_in_reg' [/home/dell/Documents/Vivado/ICP_accelerator/code/source/Controller.vhd:84]
+WARNING: [Synth 8-327] inferring latch for variable 'rst_sumReg_reg' [/home/dell/Documents/Vivado/ICP_accelerator/code/source/Controller.vhd:81]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 3517 ; free virtual = 10601
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	                3 Bit    Registers := 1     
++---Muxes : 
+	   2 Input    1 Bit        Muxes := 3     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4127 ; free virtual = 11224
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4123 ; free virtual = 11221
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4123 ; free virtual = 11221
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4141 ; free virtual = 11223
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4141 ; free virtual = 11223
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4141 ; free virtual = 11223
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4141 ; free virtual = 11223
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4141 ; free virtual = 11223
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4141 ; free virtual = 11223
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------+------+
+|      |Cell  |Count |
++------+------+------+
+|1     |OBUFT |    17|
++------+------+------+
+
+Report Instance Areas: 
++------+---------+-------+------+
+|      |Instance |Module |Cells |
++------+---------+-------+------+
+|1     |top      |       |    17|
++------+---------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4141 ; free virtual = 11223
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 11 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2483.316 ; gain = 7.914 ; free physical = 4141 ; free virtual = 11223
+Synthesis Optimization Complete : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2483.324 ; gain = 7.914 ; free physical = 4141 ; free virtual = 11223
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2483.324 ; gain = 0.000 ; free physical = 4225 ; free virtual = 11308
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2483.324 ; gain = 0.000 ; free physical = 4130 ; free virtual = 11214
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: b7a5d59a
+INFO: [Common 17-83] Releasing license: Synthesis
+18 Infos, 11 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:16 ; elapsed = 00:00:11 . Memory (MB): peak = 2483.324 ; gain = 8.012 ; free physical = 4280 ; free virtual = 11364
+INFO: [Common 17-1381] The checkpoint '/home/dell/Documents/Vivado/ICP_accelerator/ICP_accelerator.runs/synth_1/TOP_Accelerator.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file TOP_Accelerator_utilization_synth.rpt -pb TOP_Accelerator_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sun Jan 30 15:20:31 2022...

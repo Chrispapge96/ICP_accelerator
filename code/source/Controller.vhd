@@ -30,28 +30,30 @@ entity Controller is
 		IN_read : 	in  std_logic;
 		IN_load: 	in  std_logic;
 		IN_matrix:	in  std_logic_vector(3 downto 0);
-		web: 		out std_logic_vector(1 downto 0);
-		addr_ram_w:	out std_logic_vector(7 downto 0);
-		addr_ram_r:	out std_logic_vector(7 downto 0);
-		cnt_enable: out std_logic;
+		finished:   out std_logic;
+		addr_ram:	out std_logic_vector(7 downto 0);
 		addr_in:	out std_logic_vector(3 downto 0);
 		addr_rom:	out std_logic_vector(3 downto 0);
-		cnt:		out std_logic_vector(5 downto 0);
 		rst_sumReg:	out std_logic
-
 		);
 
 end Controller;
 
 architecture Behavioral of Controller is
  
-	type state_of_operation is (IDLE,OP,LOAD,SAVE,LINE_UPDATE,FINISHED);
+	type state_of_operation is (IDLE,OP,LOAD,SAVE,LINE_UPDATE,FINISH, READ);
 	type state_of_loading is (WAIT_LOAD,FETCH);
+	
+	signal web         : std_logic_vector(1 downto 0);
+	signal addr_ram_w  : std_logic_vector(7 downto 0);
+	signal addr_ram_r  : std_logic_vector(7 downto 0);
+	signal cnt_enable  : std_logic;
+	
 	signal state_cur, state_next: 		state_of_operation;
 	signal loading_cur,loading_next : 	state_of_loading;
 
-	signal sumReg_c,sumReg_n : 					std_logic_vector(15 downto 0);
-	signal web :						std_logic_vector(1 downto 0);
+	signal sumReg_c,sumReg_n : 			std_logic_vector(15 downto 0);
+	signal web_ctr :					std_logic_vector(1 downto 0);
 	signal cnt_r,cnt_n : 				std_logic_vector(5 downto 0);
 
 
@@ -71,41 +73,31 @@ architecture Behavioral of Controller is
 	end process;
 
 
-
-	end process;
-
-	Operation_of each state: process() is begin
+	Operation_of_each_state: process(IN_matrix) is begin
 	state_next<=state_cur;
 	loading_next<=loading_cur;
 		case state_cur is
 			when IDLE =>
 				rst_sumReg<='1';
 				-- goes to Input unit input_reg_next(255 downto 0)<=(others=>'0');
-				cnt_n<='0';
+				cnt_n<= (others => '0');
 				addr_in<="0000";
 				addr_rom<="0000";
 				web<="00";
 				-- goes to MAC unit sumReg_n<=(others=>'0'); 
 				addr_ram_r <= IN_matrix & "0000";
-				finished<='0';
+				finished <= '0';
 				if IN_read='1' then
-					state_next<=READ;
+					state_next<= READ;
 				else
 					state_next<=state_cur;
 					if IN_load='1' then
 					state_next<=LOAD;
+					end if;
 				end if;
-			when
-
-
-
-
-
-
-
-
-
-
-
+			 when others =>
+								
+		end case;
+	end process;
 
 end Behavioral;
