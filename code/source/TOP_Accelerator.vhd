@@ -16,11 +16,11 @@ use IEEE.NUMERIC_STD.ALL;
 entity TOP_Accelerator is
 	Port (
 		clk        : in  std_logic;                       -- Clock signal
-		reset      : in  std_logic;                       -- Reset signal
+		rst      : in  std_logic;                       -- Reset signal
 		IN_read    : in  std_logic;                       -- Read signal
 		IN_load    : in  std_logic;                       -- Start loading data signal
 		IN_data_in : in  std_logic_vector(255 downto 0);   -- Input data to set
-		IN_matrix_sel : in std_logic_vector(3 downto 0);  -- Result matrix index
+		IN_matrix : in std_logic_vector(3 downto 0);  -- Result matrix index
 		OUT_data_out : out std_logic_vector(15 downto 0);  -- Output data
 		finish     : out std_logic
 	);
@@ -36,21 +36,45 @@ component Controller is
 		rst:		in std_logic;
 		IN_read : 	in std_logic;
 		IN_load: 	in std_logic;
+		IN_matrix:	in  std_logic_vector(3 downto 0);
 		web: 		out std_logic_vector(1 downto 0);
-		addr_ram_w:	out std_logic_vector(7 downto 0);
-		addr_ram_r:	out std_logic_vector(7 downto 0);
+		addr_ram:	out std_logic_vector(7 downto 0);
 		cnt_enable: out std_logic;
-		addr_in:	out std_logic_vector(3 downto 0);
+		addr_In:	out std_logic_vector(3 downto 0);
 		addr_rom:	out std_logic_vector(3 downto 0);
-		cnt:		out std_logic_vector(5 downto 0)
+		rst_sumReg:	out std_logic;
+		load_enable: out std_logic
 		);
 end component;
 
 ---- SIGNAL DEFINITIONS --
-
+signal web: std_logic_vector(1 downto 0);
+signal addr_ram: std_logic_vector(7 downto 0);
+signal	cnt_enable: std_logic;
+signal	addr_In: std_logic_vector(3 downto 0);
+signal	addr_rom: std_logic_vector(3 downto 0);
+signal	rst_sumReg: std_logic;
+signal  load_enable: std_logic;
 
 begin
-	OUT_data_out <= (others => '0');
-	finish <= '0';
+--	OUT_data_out <= (others => '0');
+--	finish <= '0';
+
+	contr: Controller
+	port map (
+		clk=>clk,
+		rst=>rst,
+		IN_load=>IN_load,
+		IN_read=>IN_read,
+		IN_matrix=>IN_matrix,
+		web=>web,
+		addr_ram=>addr_ram,
+		cnt_enable=>cnt_enable,
+		addr_In=>addr_In,
+		addr_rom=>addr_rom,
+		rst_sumReg=>rst_sumReg,
+		load_enable=>load_enable
+		
+	);
 
 end Structural;

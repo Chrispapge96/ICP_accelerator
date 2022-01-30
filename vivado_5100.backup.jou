@@ -1,0 +1,38 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Sun Jan 30 17:38:32 2022
+# Process ID: 5100
+# Current directory: C:/Users/Xristos/Documents/GitHub/ICP_accelerator
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent15704 C:\Users\Xristos\Documents\GitHub\ICP_accelerator\ICP_accelerator.xpr
+# Log file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator/vivado.log
+# Journal file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.xpr
+update_compile_order -fileset sources_1
+file mkdir C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.srcs/sim_1/new
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.srcs/sim_1/new/TB_controller.vhd w ]
+add_files -fileset sim_1 C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.srcs/sim_1/new/TB_controller.vhd
+update_compile_order -fileset sim_1
+export_ip_user_files -of_objects  [get_files C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.srcs/sim_1/new/TB_controller.vhd] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.srcs/sim_1/new/TB_controller.vhd
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/simulation/TB_Controller.vhd w ]
+add_files -fileset sim_1 C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/simulation/TB_Controller.vhd
+update_compile_order -fileset sim_1
+export_ip_user_files -of_objects  [get_files C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/simulation/Accelerator_tb.vhd] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/simulation/Accelerator_tb.vhd
+update_compile_order -fileset sim_1
+update_compile_order -fileset sim_1
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+source TOP_Accelerator.tcl
+update_compile_order -fileset sim_1
+launch_simulation
+launch_simulation
+close_sim

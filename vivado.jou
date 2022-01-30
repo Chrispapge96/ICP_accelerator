@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Sun Jan 30 19:53:28 2022
+# Process ID: 15568
+# Current directory: C:/Users/Xristos/Documents/GitHub/ICP_accelerator
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent17288 C:\Users\Xristos\Documents\GitHub\ICP_accelerator\ICP_accelerator.xpr
+# Log file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator/vivado.log
+# Journal file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator\vivado.jou
+#-----------------------------------------------------------
+start_guioopen_project C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.xpr
+pdate_compile_order -fileset sources_1
