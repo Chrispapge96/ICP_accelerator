@@ -37,6 +37,7 @@ component Controller is port(
 	IN_load: 	in  std_logic;
 	IN_matrix:	in  std_logic_vector(3 downto 0);
 	finished:   out std_logic;
+	web         : out std_logic_vector(1 downto 0);
 	addr_ram:	out std_logic_vector(7 downto 0);
 	addr_in:	out std_logic_vector(3 downto 0);
 	addr_rom:	out std_logic_vector(3 downto 0);
@@ -54,10 +55,22 @@ component MAC is port(
 	);
 end component;
 
+component Input_Matrix is
+generic(WORD_LENGTH : integer := 16);
+port(
+	clk         : in std_logic;
+	rst         : in std_logic;
+	load_enable : in std_logic;
+	IN_data     : in std_logic_vector(255 downto 0);        
+	addr_in     : in std_logic_vector (3 downto 0);
+	data        : out std_logic_vector (15 downto 0)
+);
+end component;
 ---- SIGNAL DEFINITIONS --
 
 signal load_enable	: std_logic;
 signal rst_sumReg	: std_logic;
+signal web          : std_logic_vector(1 downto 0);
 signal addr_in 		: std_logic_vector(3 downto 0);
 signal addr_rom		: std_logic_vector(3 downto 0);
 signal addr_ram		: std_logic_vector(7 downto 0);
@@ -78,6 +91,7 @@ begin
 		IN_load		=> in_load,
 		IN_matrix   => IN_matrix_sel,
 		finished	=> finished,
+		web         => web,
 		addr_ram	=> addr_ram,
 		addr_in		=> addr_in,
 		addr_rom	=> addr_rom,
@@ -91,6 +105,15 @@ begin
 		dataROM		=> data_rom,
 		in_data		=> data_in,
 		dataRAM		=> data_ram
+	);
+	-- Setup the input registers
+	input_matrix_inst: Input_Matrix port map(
+		clk			=> clk,
+		rst			=> reset,
+		load_enable	=> load_enable,
+		IN_data		=> IN_data_in,
+		addr_in		=> addr_in,
+		data		=> data_in
 	);
 end Structural;
 

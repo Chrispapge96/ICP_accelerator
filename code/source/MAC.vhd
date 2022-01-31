@@ -20,9 +20,9 @@ entity MAC is
 architecture behavioral of MAC is
 
     -- Signal definition
-    signal mac_r, mac_n   : std_logic_vector (16 downto 0);
-    signal mul0, mul1, sum0         : std_logic_vector (15 downto 0);
-    signal mac      : std_logic_vector (16 downto 0);
+    signal mac_r, mac_n     : std_logic_vector (16 downto 0);
+    signal mul0, mul1, sum0 : std_logic_vector (15 downto 0);
+    signal mac              : std_logic_vector (16 downto 0);
 
 begin
 

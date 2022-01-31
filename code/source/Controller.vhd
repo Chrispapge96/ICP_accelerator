@@ -31,6 +31,7 @@ entity Controller is
 		IN_load: 	in  std_logic;
 		IN_matrix:	in  std_logic_vector(3 downto 0);
 		finished:   out std_logic;
+		web         : out std_logic_vector(1 downto 0);
 		addr_ram:	out std_logic_vector(7 downto 0);
 		addr_in:	out std_logic_vector(3 downto 0);
 		addr_rom:	out std_logic_vector(3 downto 0);
@@ -44,7 +45,7 @@ architecture Behavioral of Controller is
 	type state_of_operation is (IDLE,OP,LOAD,SAVE,LINE_UPDATE,FINISH, READ);
 	type state_of_loading is (WAIT_LOAD,FETCH);
 	
-	signal web         : std_logic_vector(1 downto 0);
+	
 	signal addr_ram_w  : std_logic_vector(7 downto 0);
 	signal addr_ram_r  : std_logic_vector(7 downto 0);
 	signal cnt_enable  : std_logic;
@@ -52,8 +53,7 @@ architecture Behavioral of Controller is
 	signal state_cur, state_next: 		state_of_operation;
 	signal loading_cur,loading_next : 	state_of_loading;
 
-	signal sumReg_c,sumReg_n : 			std_logic_vector(15 downto 0);
-	signal web_ctr :					std_logic_vector(1 downto 0);
+	signal sumReg_c,sumReg_n : 			std_logic_vector(15 downto 0);	
 	signal cnt_r,cnt_n : 				std_logic_vector(5 downto 0);
 
 
