@@ -7,14 +7,14 @@ entity TB_Controller is
 end TB_Controller;
 
 architecture Structural of TB_Controller is
-	signal clk: std_logic;
+	signal clk: std_logic :='0';
 	signal rst: std_logic;
-	signal IN_read: std_logic;
-	signal IN_load: std_logic;
-	signal IN_matrix: std_logic_vector(3 downto 0);
-    signal IN_data :   std_logic_vector(255 downto 0);
-	signal Out_data:   std_logic_vector(15 downto 0);
-	signal finito:     std_logic;
+	signal IN_read: std_logic:='0';
+	signal IN_load: std_logic:='0';
+	signal IN_matrix: std_logic_vector(3 downto 0):="0000";
+    signal IN_data :   std_logic_vector(255 downto 0):=(others=>'0');
+	signal Out_data:   std_logic_vector(15 downto 0):=(others=>'0');
+	signal finito:     std_logic:='0';
 	
 	component TOP_Accelerator is
 		port(

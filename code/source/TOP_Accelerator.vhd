@@ -32,29 +32,30 @@ architecture Structural of TOP_Accelerator is
 
 component Controller is
 	port(
-		clk:		in std_logic;
-		rst:		in std_logic;
-		IN_read : 	in std_logic;
-		IN_load: 	in std_logic;
-		IN_matrix:	in  std_logic_vector(3 downto 0);
-		web: 		out std_logic_vector(1 downto 0);
-		addr_ram:	out std_logic_vector(7 downto 0);
-		cnt_enable: out std_logic;
-		addr_In:	out std_logic_vector(3 downto 0);
-		addr_rom:	out std_logic_vector(3 downto 0);
-		rst_sumReg:	out std_logic;
-		load_enable: out std_logic
+		clk           :	in std_logic;
+		rst           :	in std_logic;
+		IN_read       : in std_logic;
+		IN_load       : in std_logic;
+		IN_matrix     :	in  std_logic_vector(3 downto 0);
+		web           : out std_logic_vector(1 downto 0);
+		addr_ram      :	out std_logic_vector(7 downto 0);
+		addr_In       :	out std_logic_vector(3 downto 0);
+		addr_rom      :	out std_logic_vector(3 downto 0);
+		rst_sumReg    :	out std_logic;
+		load_enable   : out std_logic;
+		finish        : out std_logic
+		
 		);
 end component;
 
 ---- SIGNAL DEFINITIONS --
 signal web: std_logic_vector(1 downto 0);
 signal addr_ram: std_logic_vector(7 downto 0);
-signal	cnt_enable: std_logic;
 signal	addr_In: std_logic_vector(3 downto 0);
 signal	addr_rom: std_logic_vector(3 downto 0);
 signal	rst_sumReg: std_logic;
 signal  load_enable: std_logic;
+
 
 begin
 --	OUT_data_out <= (others => '0');
@@ -69,12 +70,11 @@ begin
 		IN_matrix=>IN_matrix,
 		web=>web,
 		addr_ram=>addr_ram,
-		cnt_enable=>cnt_enable,
 		addr_In=>addr_In,
 		addr_rom=>addr_rom,
 		rst_sumReg=>rst_sumReg,
-		load_enable=>load_enable
-		
+		load_enable=>load_enable,
+		finish=>finish
 	);
 
 end Structural;
