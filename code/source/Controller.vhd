@@ -83,17 +83,17 @@ architecture Behavioral of Controller is
 		elsif state_cur=LOAD then
 			state_next<=OP;
 		elsif state_cur=OP then
-			if cnt_r(1 downto 0)="11" then
-				state_next<=SAVE;
-			else
-				state_next<=state_cur;
-			end if;
-		elsif state_cur=SAVE then
+		  if cnt_r(1 downto 0)="11" then
 			if cnt_r(5 downto 0)="111111" then
 				state_next<=FINISHED;
 			else
-				state_next<=OP;
+				state_next<=SAVE;
 			end if;
+		  else
+		      state_next<=state_cur;
+		  end if;
+		elsif state_cur=SAVE then
+				state_next<=OP;
 		elsif state_cur=FINISHED then
 			state_next<=IDLE;
 		end if;
