@@ -48,6 +48,28 @@ component Controller is
 		);
 end component;
 
+component MAC is port(
+	clk         : in std_logic; -- Clock signal
+	rst         : in std_logic; -- Reset signal
+	init_mac    : in std_logic; -- Reset the accumulation
+	dataROM     : in std_logic_vector (11 downto 0);    -- 2 7bits words from ROM
+	in_data     : in std_logic_vector (15 downto 0);    -- 2 8bits words from inpuyt buffer
+	dataRAM     : out std_logic_vector (15 downto 0)    -- 16bit result
+	);
+end component;
+
+component Input_Matrix is
+generic(WORD_LENGTH : integer := 16);
+port(
+	clk         : in std_logic;
+	rst         : in std_logic;
+	load_enable : in std_logic;
+	IN_data     : in std_logic_vector(255 downto 0);        
+	addr_in     : in std_logic_vector (3 downto 0);
+	data        : out std_logic_vector (15 downto 0)
+);
+end component;
+
 component ROM is
      Port ( 
             clk         : in std_logic;
@@ -66,7 +88,8 @@ signal	rst_sumReg: std_logic;
 signal  load_enable: std_logic;
 signal  enable_ROM: std_logic;
 signal  dataROM:    std_logic_vector(11 downto 0);
-
+signal  data_in:    std_logic_vector(15 downto 0);
+signal  dataRAM:    std_logic_vector(15 downto 0);
 
 begin
 --	OUT_data_out <= (others => '0');
@@ -96,6 +119,25 @@ begin
              addr_ROM=>addr_rom,
              dataROM=>dataROM	 
 	 );
+	 
+	 	-- Setup the MAC
+	mac_inst: MAC port map(
+		clk			=> clk,
+		rst		    => rst,
+		init_mac	=> rst_sumReg,
+		dataROM		=> dataROM,
+		in_data		=> data_in,
+		dataRAM		=> dataRAM
+	);
+	-- Setup the input registers
+	input_matrix_inst: Input_Matrix port map(
+		clk			=> clk,
+		rst			=> rst,
+		load_enable	=> load_enable,
+		IN_data		=> IN_data_in,
+		addr_in		=> addr_in,
+		data		=> data_in
+	);
+end Structural;
 	
 
-end Structural;

@@ -36,7 +36,7 @@ architecture Behavioral of ROM is
     
     begin
     
-   seq: process(clk) is begin
+   seq: process(clk,enable_ROM) is begin
             if rising_edge(clk) and enable_ROM='1' then
                 dataROM<=coef(CONV_INTEGER(unsigned(addr_ROM)));
             end if;
