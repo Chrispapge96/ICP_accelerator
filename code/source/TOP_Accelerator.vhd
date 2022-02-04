@@ -79,6 +79,34 @@ component ROM is
         );
 end component;
 
+component ST_SPHDL_160x32m8_L
+--synopsys synthesis_off
+   GENERIC (
+        Fault_file_name : STRING := "ST_SPHDL_160x32m8_L_faults.txt";
+        ConfigFault : Boolean := FALSE;
+        max_faults : Natural := 20;
+        -- generics for Memory initialization
+        MEM_INITIALIZE  : BOOLEAN := FALSE;
+        BinaryInit      : INTEGER := 0;
+        InitFileName    : STRING  := "ST_SPHDL_160x32m8_L.cde";
+        Corruption_Read_Violation : BOOLEAN := TRUE;
+        Debug_mode : String := "ALL_WARNING_MODE";
+        InstancePath : String := "ST_SPHDL_160x32m8_L"
+    );
+--synopsys synthesis_on
+
+    PORT (
+        Q : OUT std_logic_vector(31 DOWNTO 0);
+        RY : OUT std_logic;
+        CK : IN std_logic;
+        CSN : IN std_logic;
+        TBYPASS : IN std_logic;
+        WEN : IN std_logic;
+        A : IN std_logic_vector(7 DOWNTO 0);
+        D : IN std_logic_vector(31 DOWNTO 0)   
+) ;
+end component;
+
 ---- SIGNAL DEFINITIONS --
 signal web: std_logic_vector(1 downto 0);
 signal addr_ram: std_logic_vector(7 downto 0);
@@ -138,6 +166,10 @@ begin
 		addr_in		=> addr_in,
 		data		=> data_in
 	);
+	
+	   
+	   
+	   
 end Structural;
 	
 
