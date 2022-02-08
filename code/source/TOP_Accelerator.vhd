@@ -21,7 +21,7 @@ entity TOP_Accelerator is
 		IN_load    : in  std_logic;                       -- Start loading data signal
 		IN_data_in : in  std_logic_vector(255 downto 0);   -- Input data to set
 		IN_matrix : in std_logic_vector(3 downto 0);  -- Result matrix index
-		OUT_data_out : out std_logic_vector(15 downto 0);  -- Output data
+		OUT_data_out : out std_logic_vector(31 downto 0);  -- Output data
 		finish     : out std_logic
 	);
 end TOP_Accelerator;
@@ -43,6 +43,7 @@ component Controller is
             addr_rom      :	out std_logic_vector(3 downto 0);
             rst_sumReg    :	out std_logic;
             load_enable   : out std_logic;
+            RAM_part      : out std_logic ;
             finish        : out std_logic
             
 		);
@@ -52,9 +53,10 @@ component MAC is port(
 	clk         : in std_logic; -- Clock signal
 	rst         : in std_logic; -- Reset signal
 	init_mac    : in std_logic; -- Reset the accumulation
+	RAM_part		: in std_logic;
 	dataROM     : in std_logic_vector (11 downto 0);    -- 2 7bits words from ROM
 	in_data     : in std_logic_vector (15 downto 0);    -- 2 8bits words from inpuyt buffer
-	dataRAM     : out std_logic_vector (15 downto 0)    -- 16bit result
+	dataRAM     : out std_logic_vector (31 downto 0)    -- 16bit result
 	);
 end component;
 
@@ -79,33 +81,21 @@ component ROM is
         );
 end component;
 
-component ST_SPHDL_160x32m8_L
---synopsys synthesis_off
-   GENERIC (
-        Fault_file_name : STRING := "ST_SPHDL_160x32m8_L_faults.txt";
-        ConfigFault : Boolean := FALSE;
-        max_faults : Natural := 20;
-        -- generics for Memory initialization
-        MEM_INITIALIZE  : BOOLEAN := FALSE;
-        BinaryInit      : INTEGER := 0;
-        InitFileName    : STRING  := "ST_SPHDL_160x32m8_L.cde";
-        Corruption_Read_Violation : BOOLEAN := TRUE;
-        Debug_mode : String := "ALL_WARNING_MODE";
-        InstancePath : String := "ST_SPHDL_160x32m8_L"
-    );
---synopsys synthesis_on
 
-    PORT (
-        Q : OUT std_logic_vector(31 DOWNTO 0);
-        RY : OUT std_logic;
-        CK : IN std_logic;
-        CSN : IN std_logic;
-        TBYPASS : IN std_logic;
-        WEN : IN std_logic;
-        A : IN std_logic_vector(7 DOWNTO 0);
-        D : IN std_logic_vector(31 DOWNTO 0)   
-) ;
+component SRAM_SP_WRAPPER is
+  port (
+    ClkxCI  : in  std_logic;
+    CSxSI   : in  std_logic;            -- Active Low
+    WExSI   : in  std_logic;            --Active Low
+    AddrxDI : in  std_logic_vector (7 downto 0);
+    RYxSO   : out std_logic;
+    DataxDI : in  std_logic_vector (31 downto 0);
+    DataxDO : out std_logic_vector (31 downto 0)
+    );
 end component;
+
+
+
 
 ---- SIGNAL DEFINITIONS --
 signal web: std_logic_vector(1 downto 0);
@@ -117,8 +107,9 @@ signal  load_enable: std_logic;
 signal  enable_ROM: std_logic;
 signal  dataROM:    std_logic_vector(11 downto 0);
 signal  data_in:    std_logic_vector(15 downto 0);
-signal  dataRAM:    std_logic_vector(15 downto 0);
-
+signal  dataRAM:    std_logic_vector(31 downto 0);
+signal  ready:      std_logic;
+signal  RAM_part:   std_logic;
 begin
 --	OUT_data_out <= (others => '0');
 --	finish <= '0';
@@ -137,6 +128,7 @@ begin
             addr_rom=>addr_rom,
             rst_sumReg=>rst_sumReg,
             load_enable=>load_enable,
+            RAM_part=>RAM_part,
             finish=>finish
 	);
 	
@@ -153,6 +145,7 @@ begin
 		clk			=> clk,
 		rst		    => rst,
 		init_mac	=> rst_sumReg,
+		RAM_part	=> RAM_part,
 		dataROM		=> dataROM,
 		in_data		=> data_in,
 		dataRAM		=> dataRAM
@@ -167,7 +160,16 @@ begin
 		data		=> data_in
 	);
 	
-	   
+    RAM              : SRAM_SP_WRAPPER 
+  port map (
+        ClkxCI      =>clk,
+        CSxSI       =>web(0),
+        WExSI       =>web(1),            --Active Low
+        AddrxDI     =>addr_ram,
+        RYxSO       =>ready,
+        DataxDI     =>dataRAM,
+        DataxDO     =>OUT_data_out
+    );	   
 	   
 	   
 end Structural;

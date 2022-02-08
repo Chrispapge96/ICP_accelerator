@@ -34,14 +34,15 @@ begin
     -- Register management process
     register_process : process(clk, rst)
     begin
-        if rst = '0' then
-            -- Defualt values set to 0
-            for I in 0 to WL_MIN_1   loop
-                data_r(I) <= (others => '0');
-            end loop;
-            
-        elsif rising_edge(clk) then
-            data_r <= data_n;
+        if rising_edge(clk) then
+            if rst='1' then
+                -- Defualt values set to 0
+                for I in 0 to WL_MIN_1   loop
+                    data_r(I) <= (others => '0');
+                end loop;
+            else
+                data_r <= data_n;
+            end if;
         end if;
     end process;
 
