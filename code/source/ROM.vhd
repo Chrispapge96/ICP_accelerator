@@ -1,6 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.std_logic_arith.all;
+use ieee.numeric_std.all;
 
 entity ROM is
  Port ( clk         : in std_logic;
@@ -36,10 +36,8 @@ architecture Behavioral of ROM is
     
     begin
     
-   seq: process(clk,enable_ROM) is begin
-            if rising_edge(clk) and enable_ROM='1' then
-                dataROM<=coef(CONV_INTEGER(unsigned(addr_ROM)));
-            end if;
-        end process;
+
+        dataROM<=coef(to_integer(unsigned(addr_ROM)));
+
     
 end Behavioral;

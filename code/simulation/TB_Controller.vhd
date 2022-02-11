@@ -20,10 +20,10 @@ architecture Structural of TB_Controller is
 	signal IN_read: std_logic:='0';
 	signal IN_load: std_logic:='0';
 	signal IN_matrix: std_logic_vector(3 downto 0):="0000";
-   signal IN_data :   std_logic_vector(255 downto 0):=(others=>'0');
-	signal Out_data:   std_logic_vector(31 downto 0):=(others=>'0');
+    signal IN_data:   std_logic_vector(255 downto 0):=(others=>'0');
+	signal Out_data:   std_logic_vector(31 downto 0);
 	signal finito:     std_logic:='0';
-
+	signal outRAM:     std_logic_vector(31 downto 0);
 
 	-----------------------------------------------------------------------------
 	--COMPONENTS
@@ -38,7 +38,9 @@ architecture Structural of TB_Controller is
 		IN_data_in : in  std_logic_vector(255 downto 0);   -- Input data to set
 		IN_matrix : in std_logic_vector(3 downto 0);  -- Result matrix index
 		OUT_data_out : out std_logic_vector(31 downto 0);  -- Output data
-		finish     : out std_logic
+		finish     : out std_logic;
+		test_out : out std_logic_vector(31 downto 0)
+
 			);
 	end component;
 
@@ -46,9 +48,9 @@ architecture Structural of TB_Controller is
 
 begin
     
-   
+
         
-		contr: TOP_Accelerator
+		top_ac: TOP_Accelerator
 	port map (
 		clk=>clk,
 		rst=>rst,
@@ -57,14 +59,17 @@ begin
 		IN_matrix=>IN_matrix,
 	   IN_data_in=>IN_data,
 	   OUT_data_out=>Out_data,
-	   finish=>finito
+	   finish=>finito,
+	   test_out=>outRAM
 	);
+	
      
      rst <= '1', '0' after 50 ns;
      clk <= not clk after 10 ns;
      
      stimulus: process
      
+      file Fout: TEXT open WRITE_MODE is "C:\Users\Xristos\Documents\GitHub\ICP_accelerator\code\simulation\output.txt";
       file Fin: TEXT open READ_MODE is "C:\Users\Xristos\Documents\GitHub\ICP_accelerator\code\simulation\input_stimuli.txt";
 	-----------------------------------------------------------------------------
 	--VARIABLES for reading
@@ -72,6 +77,7 @@ begin
 
 	variable read_line_cur : line;
 	variable read_field_cur: std_logic_vector(7 downto 0);
+	variable write_line_cur: line;
      
       begin
      
@@ -81,8 +87,11 @@ begin
                 read(read_line_cur,read_field_cur);
                 IN_data((7+8*I) downto I*8)<=read_field_cur;
             end loop;   
-             
-        
+            
+            
+            write(write_line_cur,outRAM);
+	        writeline(Fout,write_line_cur);	
+	        
             wait until rst='0';
             IN_load<='0';
             IN_read<='0';
@@ -95,13 +104,23 @@ begin
             IN_load<='0';
             wait for 350ns;
             IN_load<='1';
+          
             wait for 10ns;
+          
             IN_load<='0';
+            
             wait for 640ns;
-            wait for 50ns;
-            IN_matrix<="0000";
-            IN_read<='1';
+             IN_matrix<="0000";
+             IN_read<='1';
+          
+   
         end loop;
+         for I in 0 to 1000 loop
+            IN_read<='1';
+            write(write_line_cur,Out_data);
+            writeline(Fout,write_line_cur);
+            end loop;
+      	
      end process;
      
        

@@ -22,7 +22,8 @@ entity TOP_Accelerator is
 		IN_data_in : in  std_logic_vector(255 downto 0);   -- Input data to set
 		IN_matrix : in std_logic_vector(3 downto 0);  -- Result matrix index
 		OUT_data_out : out std_logic_vector(31 downto 0);  -- Output data
-		finish     : out std_logic
+		finish     : out std_logic;
+		test_out  :   out std_logic_vector(31 downto 0)
 	);
 end TOP_Accelerator;
 
@@ -171,7 +172,7 @@ begin
         DataxDO     =>OUT_data_out
     );	   
 	   
-	   
+	   test_out<=dataRAM;
 end Structural;
 	
 

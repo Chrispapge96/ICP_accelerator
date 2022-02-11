@@ -130,12 +130,14 @@ architecture Behavioral of Controller is
 				cnt_n<=cnt_r+1;
 				web_s<="11";
 			when SAVE =>
-			 	web_s<="00";
+				cnt_n<=cnt_r+1;
 			 	if cnt_r(3)='1' then
+			 			web_s<="00";
 				    addr_ram_w_n<=addr_ram_w + 1;
 				end if;
-			 	rst_sumReg<='1';
+			 	rst_sumReg<='1';	
 			when FINISHED =>
+				cnt_n<=cnt_r+1;
 			 	finish<='1';
 			 	web_s<="00";
 				addr_ram_w_n<=addr_ram_w + 1;
@@ -150,7 +152,7 @@ architecture Behavioral of Controller is
 	addr_In<=cnt_r(5 downto 4) & cnt_r(1 downto 0);
 
 	web<=web_s;
-  RAM_part<=cnt_r(4);
+  RAM_part<=cnt_r(2);
 
 
 

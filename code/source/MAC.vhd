@@ -21,9 +21,9 @@ entity MAC is
 architecture behavioral of MAC is
 
     -- Signal definition
-    signal mac_r, mac_n     : std_logic_vector (15 downto 0);
-    signal mul0, mul1, sum0 : std_logic_vector (15 downto 0);
-    signal mac              : std_logic_vector (15 downto 0);
+    signal mac_r, mac_n ,mac_r0, mac_r0_n    : std_logic_vector (15 downto 0);
+    signal mul0, mul1, sum0                  : std_logic_vector (15 downto 0);
+    signal mac                               : std_logic_vector (15 downto 0):=(others=>'0');
 
 begin
 
@@ -33,20 +33,22 @@ begin
         if rising_edge (clk) then
             if rst = '1' then
                  mac_r <= (others => '0');
+                 mac_r0 <= (others => '0');
             else 
-                 mac_r <= mac_n;            
+                 mac_r <= mac_n;   
+                 mac_r0<=mac_r0_n;         
             end if;
         end if;
     end process;
 
     -- Combinatioonal process
-    combinational_process: process(init_mac, dataROM, in_data, mac_r, mul0, mul1, sum0, mac,RAM_part)
+    combinational_process: process(init_mac, dataROM, in_data, mac_r, mul0, mul1, sum0, mac,RAM_part,mac_n)
         begin
         -- Set defqult vqlues
         if RAM_part='0' then
-        dataRAM <= "0000000000000000" & mac_r;  -- Update output
+            mac_r0_n <= mac_n ;  -- Update output
         else
-        dataRAM <= mac_r & "0000000000000000";
+            mac_r0_n <= mac_r0 ;
         end if;
         
         if init_mac = '1' then  -- select the accumulation value
@@ -57,11 +59,13 @@ begin
 
         -- Perform the multiplications
         mul0    <= std_logic_vector(  unsigned("00" & dataROM(5 downto 0)) * unsigned(in_data(15 downto 8))  );--I swaped the data bits
-        mul1    <= std_logic_vector(  unsigned("00" & dataROM(11 downto 6)) * unsigned(in_data(7 downto 0))  );
+        mul1    <= std_logic_vector(  unsigned("00" & dataROM(11 downto 6)) * unsigned(in_data(7 downto 0))  );--checked the simulation
         -- Perform the addiction and update the regiter
         sum0    <= std_logic_vector(  unsigned(mul0) + unsigned(mul1)  );
         mac_n   <= std_logic_vector(  unsigned(sum0) + unsigned(mac)  );
 
     end process;
+
+    dataRAM<=mac_r & mac_r0;
 
 end behavioral;
