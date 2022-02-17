@@ -86,3 +86,4 @@
 !*.xmp
 ### remove useless files
 */sim_*
+*webtalk_pa.html
