@@ -69,7 +69,7 @@ begin
      
      stimulus: process
      
-      file Fout: TEXT open WRITE_MODE is "C:\Users\Xristos\Documents\GitHub\ICP_accelerator\code\simulation\output.txt";
+      
       file Fin: TEXT open READ_MODE is "C:\Users\Xristos\Documents\GitHub\ICP_accelerator\code\simulation\input_stimuli.txt";
 	-----------------------------------------------------------------------------
 	--VARIABLES for reading
@@ -77,7 +77,7 @@ begin
 
 	variable read_line_cur : line;
 	variable read_field_cur: std_logic_vector(7 downto 0);
-	variable write_line_cur: line;
+	
      
       begin
      
@@ -88,9 +88,7 @@ begin
                 IN_data((7+8*I) downto I*8)<=read_field_cur;
             end loop;   
             
-            
-            write(write_line_cur,outRAM);
-	        writeline(Fout,write_line_cur);	
+          
 	        
             wait until rst='0';
             IN_load<='0';
@@ -115,11 +113,7 @@ begin
           
    
         end loop;
-         for I in 0 to 1000 loop
-            IN_read<='1';
-            write(write_line_cur,Out_data);
-            writeline(Fout,write_line_cur);
-            end loop;
+         
       	
      end process;
      

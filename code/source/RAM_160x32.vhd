@@ -1,6 +1,6 @@
 LIBRARY IEEE;                   USE IEEE.STD_LOGIC_1164.ALL;
                                 USE IEEE.STD_LOGIC_ARITH.ALL;
-                                USE STD.TEXTIO.ALL;
+                                use STD.textio.all;
 
 ENTITY  ST_SPHDL_160x32m8_L IS
 
@@ -498,6 +498,7 @@ END Read_WriteMaskBased;
 
 
 BEGIN 
+
 
 --Display of messages at 0 time
 IF(NOW = 0 ns AND NOT(isMessageDisplayed)) THEN

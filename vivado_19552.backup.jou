@@ -1,0 +1,62 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Fri Feb 11 11:39:02 2022
+# Process ID: 19552
+# Current directory: C:/Users/Xristos/Documents/GitHub/ICP_accelerator
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8900 C:\Users\Xristos\Documents\GitHub\ICP_accelerator\ICP_accelerator.xpr
+# Log file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator/vivado.log
+# Journal file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+open_wave_config C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg
+source TB_Controller.tcl
+run 5000 us
+relaunch_sim
+run 5000 us
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+close_sim
+launch_simulation
+open_wave_config C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg
+source TB_Controller.tcl
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+run 5000 us
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+run 5000 us
+relaunch_sim
+relaunch_sim
+run 5000 us
+relaunch_sim
+run 5000 us
+relaunch_sim
+run 5000 us
+relaunch_sim
+run 5000 us
+relaunch_sim
+relaunch_sim
+run 5000 us
+relaunch_sim
+run 5000 us
+relaunch_sim
+relaunch_sim
+relaunch_sim
+run 5000 us
+relaunch_sim
+relaunch_sim
+close_sim

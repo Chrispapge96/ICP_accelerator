@@ -3,7 +3,6 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 
-
 -- -- ST_SPHDL_160x32_mem2011
 --words = 160
 --bits  = 32

@@ -44,7 +44,8 @@ component Controller is
             addr_rom      :	out std_logic_vector(3 downto 0);
             rst_sumReg    :	out std_logic;
             load_enable   : out std_logic;
-            RAM_part      : out std_logic ;
+            RAM_part      : out std_logic;
+            W_on 					:	out std_logic;
             finish        : out std_logic
             
 		);
@@ -55,6 +56,7 @@ component MAC is port(
 	rst         : in std_logic; -- Reset signal
 	init_mac    : in std_logic; -- Reset the accumulation
 	RAM_part		: in std_logic;
+	W_on 				: in std_logic;
 	dataROM     : in std_logic_vector (11 downto 0);    -- 2 7bits words from ROM
 	in_data     : in std_logic_vector (15 downto 0);    -- 2 8bits words from inpuyt buffer
 	dataRAM     : out std_logic_vector (31 downto 0)    -- 16bit result
@@ -111,6 +113,7 @@ signal  data_in:    std_logic_vector(15 downto 0);
 signal  dataRAM:    std_logic_vector(31 downto 0);
 signal  ready:      std_logic;
 signal  RAM_part:   std_logic;
+signal	W_on:				std_logic;
 begin
 --	OUT_data_out <= (others => '0');
 --	finish <= '0';
@@ -130,6 +133,7 @@ begin
             rst_sumReg=>rst_sumReg,
             load_enable=>load_enable,
             RAM_part=>RAM_part,
+            W_on=>W_on,
             finish=>finish
 	);
 	
@@ -147,6 +151,7 @@ begin
 		rst		    => rst,
 		init_mac	=> rst_sumReg,
 		RAM_part	=> RAM_part,
+		W_on 			=> W_on,
 		dataROM		=> dataROM,
 		in_data		=> data_in,
 		dataRAM		=> dataRAM

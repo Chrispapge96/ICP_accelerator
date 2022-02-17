@@ -17,6 +17,7 @@ entity Controller is
 		rst_sumReg  	    : out std_logic;
 		load_enable  	    : out std_logic;
 		RAM_part          : out std_logic;
+		W_on							:	out	std_logic;
 		finish    		    : out std_logic
 		);
 
@@ -104,7 +105,14 @@ architecture Behavioral of Controller is
 --------------------------------------------------------------------------------
 --Output of each state
 --------------------------------------------------------------------------------
-	Operation_of_each_state: process(state_cur,addr_ram_r,IN_matrix,cnt_r,addr_ram_w) is begin
+	Operation_of_each_state: process(state_cur,addr_ram_r,IN_matrix,cnt_r,addr_ram_w,web_s) is begin
+
+	if web_s="00" then--- this part is to send a signal for writing in th txt.
+		W_on<='1';
+	else
+		W_on<='0';
+	end if;
+
 	rst_sumReg<='0';
 	load_enable<='0';
     finish<='0';
@@ -131,7 +139,7 @@ architecture Behavioral of Controller is
 				web_s<="11";
 			when SAVE =>
 				cnt_n<=cnt_r+1;
-			 	if cnt_r(3)='1' then
+			 	if cnt_r(2 downto 0)="000" then
 			 			web_s<="00";
 				    addr_ram_w_n<=addr_ram_w + 1;
 				end if;
@@ -153,6 +161,7 @@ architecture Behavioral of Controller is
 
 	web<=web_s;
   RAM_part<=cnt_r(2);
+
 
 
 
