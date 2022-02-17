@@ -9,7 +9,7 @@ architecture structural of Input_Matrix_tb is
    -- Constants
    constant CLOCK_PERIOD   : time := 2500 ns;
    -- Components
-   component Input_Matrix_tb
+   component Input_Matrix
    port ( 
           clk         : in std_logic; -- Clock signal
           reset       : in std_logic; -- Reset signal
@@ -32,13 +32,13 @@ architecture structural of Input_Matrix_tb is
 begin  -- structural
    
 
-   DUT: entity work.MAC(behavioral) port map (
+   DUT: entity work.Input_Matrix(behavioral) port map (
           clk         => clk,
           reset       => reset,
-          init_mac    => init_mac,
-          dataROM     => dataROM,
-          in_data     => in_data,
-          dataRAM     => dataRAM
+          load_enable => load_enable,
+          IN_data     => IN_data,
+          addr_in     =>addr_in,
+          data        => data
      );
 
      -- Process to manage the reset
