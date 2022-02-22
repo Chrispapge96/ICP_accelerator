@@ -3,6 +3,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 use ieee.std_logic_textio.all;
 use IEEE.numeric_std.all;
 use ieee.math_real.all;
+use ieee.std_logic_unsigned.all;
+
 
 library STD;
 use STD.textio.all;
@@ -24,7 +26,7 @@ architecture Structural of TB_Controller is
 	signal Out_data:   std_logic_vector(31 downto 0);
 	signal finito:     std_logic:='0';
 	signal outRAM:     std_logic_vector(31 downto 0);
-
+    
 	-----------------------------------------------------------------------------
 	--COMPONENTS
 	-----------------------------------------------------------------------------
@@ -65,7 +67,7 @@ begin
 	
      
      rst <= '1', '0' after 50 ns;
-     clk <= not clk after 10 ns;
+     clk <= not clk after 5 ns;
      
      stimulus: process
      
@@ -77,8 +79,8 @@ begin
 
 	variable read_line_cur : line;
 	variable read_field_cur: std_logic_vector(7 downto 0);
-	
-     
+	variable x:    integer := 0;
+    variable mat:	std_logic_vector(3 downto 0):= "0000"; 
       begin
      
         while (not endfile(Fin)) loop
@@ -89,29 +91,26 @@ begin
             end loop;   
             
           
-	        
-            wait until rst='0';
-            IN_load<='0';
+	        if x=0 then
+                wait until rst='0';
+                x:=1;
+            end if;
+
             IN_read<='0';
-            wait for 50ns;
-            IN_matrix<="0010";
-            IN_read<='1';
             IN_load<='1';
-            wait for 10ns;
-            IN_read<='0';
-            IN_load<='0';
-            wait for 350ns;
-            IN_load<='1';
-          
-            wait for 10ns;
+          	IN_matrix<=mat;
+
+            wait for 20ns;
           
             IN_load<='0';
             
             wait for 640ns;
-             IN_matrix<="0000";
+             
              IN_read<='1';
-          
-   
+            wait for 20ns;
+            IN_read<='0'; 
+          	wait for 370ns;
+   			mat:=mat+1;
         end loop;
          
       	

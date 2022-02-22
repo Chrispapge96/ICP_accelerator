@@ -46,6 +46,7 @@ component Controller is
             load_enable   : out std_logic;
             RAM_part      : out std_logic;
             W_on 					:	out std_logic;
+            enable_MAC		:	out std_logic;
             finish        : out std_logic
             
 		);
@@ -57,6 +58,7 @@ component MAC is port(
 	init_mac    : in std_logic; -- Reset the accumulation
 	RAM_part		: in std_logic;
 	W_on 				: in std_logic;
+	enable			:	in std_logic;
 	dataROM     : in std_logic_vector (11 downto 0);    -- 2 7bits words from ROM
 	in_data     : in std_logic_vector (15 downto 0);    -- 2 8bits words from inpuyt buffer
 	dataRAM     : out std_logic_vector (31 downto 0)    -- 16bit result
@@ -114,11 +116,14 @@ signal  dataRAM:    std_logic_vector(31 downto 0);
 signal  ready:      std_logic;
 signal  RAM_part:   std_logic;
 signal	W_on:				std_logic;
+signal	enable_MAC:			std_logic;
+signal  finito:         std_logic ;
+
 begin
 --	OUT_data_out <= (others => '0');
 --	finish <= '0';
     enable_ROM<='1'; -- Not sure if we need this, but to be sure i have it prepared
-	
+	finish<=finito;
 	contr: Controller
 	port map (
             clk=>clk,
@@ -133,8 +138,9 @@ begin
             rst_sumReg=>rst_sumReg,
             load_enable=>load_enable,
             RAM_part=>RAM_part,
+            enable_MAC=>enable_MAC,
             W_on=>W_on,
-            finish=>finish
+            finish=>finito
 	);
 	
 	 rom_mem: ROM
@@ -153,6 +159,7 @@ begin
 		RAM_part	=> RAM_part,
 		W_on 			=> W_on,
 		dataROM		=> dataROM,
+		enable		=>enable_MAC,
 		in_data		=> data_in,
 		dataRAM		=> dataRAM
 	);

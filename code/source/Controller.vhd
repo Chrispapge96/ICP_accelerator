@@ -18,6 +18,7 @@ entity Controller is
 		load_enable  	    : out std_logic;
 		RAM_part          : out std_logic;
 		W_on							:	out	std_logic;
+		enable_MAC				:	out std_logic;
 		finish    		    : out std_logic
 		);
 
@@ -56,13 +57,13 @@ architecture Behavioral of Controller is
 --Logic behind RAM address write and read
 --------------------------------------------------------------------------------
 
-	RAM_MUX: process(addr_ram_r,addr_ram_w,web_s) is begin
-		if web_s(1)='1' then
-			addr_ram<=addr_ram_r;
-		else
-			addr_ram<=addr_ram_w;
-		end if;
-	end process;
+--	RAM_MUX: process(addr_ram_r,addr_ram_w,web_s) is begin
+	--	if web_s(1)='1' then
+		--	addr_ram<=addr_ram_r;
+		--else
+		--	addr_ram<=addr_ram_w;
+		--end if;
+	--end process;
 
 ---------------------------------------------------------------------------------
 --The FSM
@@ -112,7 +113,8 @@ architecture Behavioral of Controller is
 	else
 		W_on<='0';
 	end if;
-
+	enable_MAC<='0';
+	addr_ram<=addr_ram_w;
 	rst_sumReg<='0';
 	load_enable<='0';
     finish<='0';
@@ -126,18 +128,21 @@ architecture Behavioral of Controller is
 				cnt_n<=(others=>'0');
 				web_s<="11";
 				-- goes to MAC unit sumReg_n<=(others=>'0'); 
-				addr_ram_r_n <= IN_matrix & "0000";
+				addr_ram_r_n <='0' & IN_matrix & "000";
 			when READ =>
+				addr_ram<=addr_ram_r;
 				addr_ram_r_n<=addr_ram_r + '1';
 				cnt_n<=cnt_r+1;
 				web_s<="10";
 			when LOAD =>
 				load_enable<='1';
 			when OP =>
+				enable_MAC<='1';
 				load_enable<='0';
 				cnt_n<=cnt_r+1;
 				web_s<="11";
 			when SAVE =>
+				enable_MAC<='1';
 				cnt_n<=cnt_r+1;
 			 	if cnt_r(2 downto 0)="000" then
 			 			web_s<="00";
