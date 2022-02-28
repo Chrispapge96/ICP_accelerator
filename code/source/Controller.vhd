@@ -17,8 +17,9 @@ entity Controller is
 		rst_sumReg  	    : out std_logic;
 		load_enable  	    : out std_logic;
 		RAM_part          : out std_logic;
-		W_on							:	out	std_logic;
+		en_diag						:	out std_logic;
 		enable_MAC				:	out std_logic;
+		option 						:	out std_logic;
 		finish    		    : out std_logic
 		);
 
@@ -26,7 +27,7 @@ end Controller;
 
 architecture Behavioral of Controller is
  
-	type state_of_operation is (IDLE,OP,LOAD,SAVE,FINISHED,READ);
+	type state_of_operation is (IDLE,OP,LOAD,SAVE,SAVE_extra,FINISHED,READ);
 	signal state_cur, state_next														: state_of_operation;
 
 	signal addr_ram_r_n,addr_ram_r,addr_ram_w_n,addr_ram_w  :	std_logic_vector(7 downto 0);
@@ -79,7 +80,7 @@ architecture Behavioral of Controller is
 				end if;
 			end if;
 		elsif state_cur=READ then
-			if cnt_r(2 downto 0)="111" then
+			if cnt_r(3 downto 0)="1001" then
 				state_next<=IDLE;
 			else
 				state_next<=state_cur;
@@ -89,7 +90,7 @@ architecture Behavioral of Controller is
 		elsif state_cur=OP then
 		  if cnt_r(1 downto 0)="11" then
 			if cnt_r(5 downto 0)="111111" then
-				state_next<=FINISHED;
+				state_next<=SAVE_extra;
 			else
 				state_next<=SAVE;
 			end if;
@@ -98,6 +99,8 @@ architecture Behavioral of Controller is
 		  end if;
 		elsif state_cur=SAVE then
 				state_next<=OP;
+		elsif state_cur=SAVE_extra then
+				state_next<=FINISHED;
 		elsif state_cur=FINISHED then
 			state_next<=IDLE;
 		end if;
@@ -107,16 +110,11 @@ architecture Behavioral of Controller is
 --Output of each state
 --------------------------------------------------------------------------------
 	Operation_of_each_state: process(state_cur,addr_ram_r,IN_matrix,cnt_r,addr_ram_w,web_s) is begin
-
-	if web_s="00" then--- this part is to send a signal for writing in th txt.
-		W_on<='1';
-	else
-		W_on<='0';
-	end if;
+	option<='0';
+	en_diag<='0'; 
 	enable_MAC<='0';
 	addr_ram<=addr_ram_w;
 	rst_sumReg<='0';
-	load_enable<='0';
     finish<='0';
     web_s<="11";
 	cnt_n<=cnt_r;
@@ -128,8 +126,9 @@ architecture Behavioral of Controller is
 				cnt_n<=(others=>'0');
 				web_s<="11";
 				-- goes to MAC unit sumReg_n<=(others=>'0'); 
-				addr_ram_r_n <='0' & IN_matrix & "000";
+				addr_ram_r_n <='0' & IN_matrix & IN_matrix(2 downto 0);-- Because we save 9 rows for each matrix
 			when READ =>
+				load_enable<='0';
 				addr_ram<=addr_ram_r;
 				addr_ram_r_n<=addr_ram_r + '1';
 				cnt_n<=cnt_r+1;
@@ -137,24 +136,48 @@ architecture Behavioral of Controller is
 			when LOAD =>
 				load_enable<='1';
 			when OP =>
+				if cnt_r(5 downto 0)<"001111" then -- This is to load while operating
+					load_enable<='1';
+				else
+					load_enable<='0';
+				end if;
 				enable_MAC<='1';
-				load_enable<='0';
+				
 				cnt_n<=cnt_r+1;
 				web_s<="11";
+								--diag_mean
+				if cnt_r="000011" or cnt_r="010111" or cnt_r="101011" or cnt_r="111111" then
+					en_diag<='1';
+				end if;
+				--
 			when SAVE =>
 				enable_MAC<='1';
 				cnt_n<=cnt_r+1;
+				if cnt_r(5 downto 0)<"001111" then -- This is to load while operating
+					load_enable<='1';
+				else
+					load_enable<='0';
+				end if;
 			 	if cnt_r(2 downto 0)="000" then
 			 			web_s<="00";
 				    addr_ram_w_n<=addr_ram_w + 1;
 				end if;
 			 	rst_sumReg<='1';	
-			when FINISHED =>
+			when SAVE_extra =>
+				load_enable<='0';
+			  enable_MAC<='1';
 				cnt_n<=cnt_r+1;
-			 	finish<='1';
 			 	web_s<="00";
 				addr_ram_w_n<=addr_ram_w + 1;
 			 	rst_sumReg<='1';
+			when FINISHED =>
+				load_enable<='0';
+				enable_MAC<='1';
+				cnt_n<=cnt_r;
+				web_s<="00";
+				finish<='1';
+				addr_ram_w_n<=addr_ram_w + 1;
+				option<='1';
 		end case;
 	end process;
 

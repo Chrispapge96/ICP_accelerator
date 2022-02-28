@@ -19,11 +19,12 @@ entity TOP_Accelerator is
 		rst      : in  std_logic;                       -- Reset signal
 		IN_read    : in  std_logic;                       -- Read signal
 		IN_load    : in  std_logic;                       -- Start loading data signal
-		IN_data_in : in  std_logic_vector(255 downto 0);   -- Input data to set
+		IN_data_in : in  std_logic_vector(15 downto 0);   -- Input data to set
 		IN_matrix : in std_logic_vector(3 downto 0);  -- Result matrix index
 		OUT_data_out : out std_logic_vector(31 downto 0);  -- Output data
-		finish     : out std_logic;
-		test_out  :   out std_logic_vector(31 downto 0)
+		finish     : out std_logic
+		
+		
 	);
 end TOP_Accelerator;
 
@@ -43,9 +44,10 @@ component Controller is
             addr_In       :	out std_logic_vector(3 downto 0);
             addr_rom      :	out std_logic_vector(3 downto 0);
             rst_sumReg    :	out std_logic;
+            option 				: out std_logic;
             load_enable   : out std_logic;
             RAM_part      : out std_logic;
-            W_on 					:	out std_logic;
+            en_diag 			: out std_logic;
             enable_MAC		:	out std_logic;
             finish        : out std_logic
             
@@ -57,7 +59,8 @@ component MAC is port(
 	rst         : in std_logic; -- Reset signal
 	init_mac    : in std_logic; -- Reset the accumulation
 	RAM_part		: in std_logic;
-	W_on 				: in std_logic;
+	en_diag			:	in std_logic;
+	option 			:	in std_logic;
 	enable			:	in std_logic;
 	dataROM     : in std_logic_vector (11 downto 0);    -- 2 7bits words from ROM
 	in_data     : in std_logic_vector (15 downto 0);    -- 2 8bits words from inpuyt buffer
@@ -71,7 +74,7 @@ port(
 	clk         : in std_logic;
 	rst         : in std_logic;
 	load_enable : in std_logic;
-	IN_data     : in std_logic_vector(255 downto 0);        
+	IN_data     : in std_logic_vector(15 downto 0);        
 	addr_in     : in std_logic_vector (3 downto 0);
 	data        : out std_logic_vector (15 downto 0)
 );
@@ -108,20 +111,21 @@ signal addr_ram: std_logic_vector(7 downto 0);
 signal	addr_In: std_logic_vector(3 downto 0);
 signal	addr_rom: std_logic_vector(3 downto 0);
 signal	rst_sumReg: std_logic;
-signal  load_enable: std_logic;
 signal  enable_ROM: std_logic;
 signal  dataROM:    std_logic_vector(11 downto 0);
 signal  data_in:    std_logic_vector(15 downto 0);
 signal  dataRAM:    std_logic_vector(31 downto 0);
 signal  ready:      std_logic;
 signal  RAM_part:   std_logic;
-signal	W_on:				std_logic;
-signal	enable_MAC:			std_logic;
-signal  finito:         std_logic ;
+signal	option:			std_logic;
+signal	enable_MAC:	std_logic;
+signal  en_diag:		std_logic;
+signal  finito:     std_logic;
+signal  load_en:    std_logic;
 
 begin
 --	OUT_data_out <= (others => '0');
---	finish <= '0';
+--	finish <= '0
     enable_ROM<='1'; -- Not sure if we need this, but to be sure i have it prepared
 	finish<=finito;
 	contr: Controller
@@ -136,10 +140,11 @@ begin
             addr_In=>addr_In,
             addr_rom=>addr_rom,
             rst_sumReg=>rst_sumReg,
-            load_enable=>load_enable,
+            load_enable=>load_en,
             RAM_part=>RAM_part,
+            option=>option,
+            en_diag=>en_diag,
             enable_MAC=>enable_MAC,
-            W_on=>W_on,
             finish=>finito
 	);
 	
@@ -157,9 +162,10 @@ begin
 		rst		    => rst,
 		init_mac	=> rst_sumReg,
 		RAM_part	=> RAM_part,
-		W_on 			=> W_on,
 		dataROM		=> dataROM,
+		en_diag   => en_diag,
 		enable		=>enable_MAC,
+		option    =>option,
 		in_data		=> data_in,
 		dataRAM		=> dataRAM
 	);
@@ -167,7 +173,7 @@ begin
 	input_matrix_inst: Input_Matrix port map(
 		clk			=> clk,
 		rst			=> rst,
-		load_enable	=> load_enable,
+		load_enable	=> load_en,
 		IN_data		=> IN_data_in,
 		addr_in		=> addr_in,
 		data		=> data_in
@@ -184,7 +190,7 @@ begin
         DataxDO     =>OUT_data_out
     );	   
 	   
-	   test_out<=dataRAM;
+	   
 end Structural;
 	
 

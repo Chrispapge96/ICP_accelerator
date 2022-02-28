@@ -2,6 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use ieee.math_real.all;
+use ieee.std_logic_unsigned.all;
 
 library work;
 
@@ -12,7 +13,7 @@ entity Input_Matrix is
         clk         : in std_logic;     -- Clock input
         rst         : in std_logic;     -- Reset input
         load_enable : in std_logic;     -- Writing enable bit
-        IN_data     : in std_logic_vector(255 downto 0);    -- Input data
+        IN_data     : in std_logic_vector(15 downto 0);    -- Input data
         addr_in     : in std_logic_vector ((integer(ceil(log2(real(WORD_LENGTH )))) - 1) downto 0);     -- Addres to output
         data        : out std_logic_vector (WORD_LENGTH-1 downto 0)    -- Output data
     );
@@ -29,34 +30,33 @@ architecture behavioral of Input_Matrix is
 
     -- Signal definition
     signal data_r, data_n   : t_Memory;
-
+    signal addr_load_c, addr_load_n: std_logic_vector(3 downto 0);--count for loading
 begin
     -- Register management process
     register_process : process(clk, rst)
     begin
         if rising_edge(clk) then
             if rst='1' then
-                -- Defualt values set to 0
                 for I in 0 to WL_MIN_1   loop
                     data_r(I) <= (others => '0');
                 end loop;
+                addr_load_c<= (others => '0');
             else
                 data_r <= data_n;
+                addr_load_c<=addr_load_n;--counter for loading
             end if;
         end if;
     end process;
 
     -- Combinational management process
-    combinational_process : process(load_enable, IN_data, addr_in, data_r)
+    combinational_process : process(load_enable, IN_data, addr_in, data_r,addr_load_c)
         begin
         -- Manage the input update
         if load_enable = '1' then
-            
-            --#pragma unroll
-            for I in 0 to WL_MIN_1  loop
-                data_n(I) <= IN_data((I * WORD_LENGTH + WL_MIN_1) downto (I * WORD_LENGTH));
-            end loop;
+            addr_load_n<=addr_load_c + 1;
+            data_n(to_integer(unsigned(addr_load_c))) <= IN_data;
         else
+            addr_load_n<=addr_load_c;
             data_n <= data_r;
         end if;
         
