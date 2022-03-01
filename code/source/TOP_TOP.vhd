@@ -377,7 +377,7 @@ begin
         IN_read=>IN_read_sig,
         IN_matrix=>matrix_bits,
         IN_data_in=>IN_bits,
-        OUT_data_out=>Out_bits,
+        OUT_data_out=>Out_bits(15 downto 0),
         finish=>finito
        
     );

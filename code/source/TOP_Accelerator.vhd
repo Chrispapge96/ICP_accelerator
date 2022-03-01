@@ -122,7 +122,11 @@ architecture Structural of TOP_Accelerator is
 	signal  finito:     	std_logic;
 	signal  load_en:    	std_logic;
 	signal  outRAM: 			std_logic_vector(31 downto 0);
+	signal LOW  : std_logic;
 	begin
+
+			LOW  <= '0';
+
 	--	OUT_data_out <= (others => '0');
 	--	finish <= '0
 	    enable_ROM<='1'; -- Not sure if we need this, but to be sure i have it prepared
@@ -149,7 +153,6 @@ architecture Structural of TOP_Accelerator is
 		
 		 rom_mem: ROM
 		 port map (
-	             clk=>clk,
 	             enable_ROM=>enable_ROM,
 	             addr_ROM=>addr_rom,
 	             dataROM=>dataROM	 
@@ -178,15 +181,16 @@ architecture Structural of TOP_Accelerator is
 							data		=> data_in
 		);
 		
-	    RAM              : SRAM_SP_WRAPPER 
+	    RAM              : ST_SPHDL_160x32m8_L 
 	  port map (
-			        ClkxCI      =>clk,
-			        CSxSI       =>web(0),
-			        WExSI       =>web(1),            --Active Low
-			        AddrxDI     =>addr_ram,
-			        RYxSO       =>ready,
-			        DataxDI     =>dataRAM,
-			        DataxDO     =>outRAM
+			        CK     =>clk,
+			        CSN       =>web(0),
+			        WEN       =>web(1),            --Active Low
+			        A     =>addr_ram,
+			        TBYPASS => LOW,
+			        RY      =>ready,
+			        D     =>dataRAM,
+			        Q     =>outRAM
 	    );	   
 
 
@@ -194,7 +198,7 @@ architecture Structural of TOP_Accelerator is
 	  -- -- Logic behind choosing the correct bits of the RAM for output
 	  ------------------------------------------------------------------------------
 
-	  	out_logic: process(addr_rom,dataRAM) is begin
+	  	out_logic: process(addr_rom,outRAM) is begin
 	  		if addr_rom(0)='0' then
 	  			OUT_data_out<=outRAM(15 downto 0);
 	  		else

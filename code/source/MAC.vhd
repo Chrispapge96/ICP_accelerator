@@ -28,7 +28,7 @@ architecture behavioral of MAC is
     -- Signal definition
     signal mac_r, mac_n ,mac_r0, mac_r0_n,max_n,max_c    : std_logic_vector (15 downto 0);
     signal mul0, mul1, sum0                              : std_logic_vector (15 downto 0);
-    signal mac                                           : std_logic_vector (15 downto 0):=(others=>'0');
+    signal mac                                           : std_logic_vector (15 downto 0);
   
     signal diag_sum_n,diag_sum_c                         : std_logic_vector (17 downto 0);
    
@@ -47,6 +47,7 @@ begin
                  mac_r0 <= (others => '0');
                  max_c <= (others => '0');
                  diag_sum_c <= (others => '0');
+                 mac<=(others => '0');
             else 
                  max_c<=max_n;
                  mac_r <= mac_n;   

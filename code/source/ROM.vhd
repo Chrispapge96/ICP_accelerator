@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use ieee.numeric_std.all;
 
 entity ROM is
- Port ( clk         : in std_logic;
+ Port (
         enable_ROM  : in std_logic;
         addr_ROM    : in std_logic_vector (3 downto 0); 
         dataROM     : out std_logic_vector (11 downto 0)

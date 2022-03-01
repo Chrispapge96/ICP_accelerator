@@ -16,11 +16,13 @@ entity Input_Matrix is
         IN_data     : in std_logic_vector(15 downto 0);    -- Input data
         addr_in     : in std_logic_vector ((integer(ceil(log2(real(WORD_LENGTH )))) - 1) downto 0);     -- Addres to output
         data        : out std_logic_vector (WORD_LENGTH-1 downto 0)    -- Output data
+
     );
 end Input_Matrix;
 
 
 architecture behavioral of Input_Matrix is
+
 
     -- Type definition
     type t_Memory is array (0 to (256/WORD_LENGTH)-1) of std_logic_vector(WORD_LENGTH - 1 downto 0);
@@ -51,13 +53,14 @@ begin
     -- Combinational management process
     combinational_process : process(load_enable, IN_data, addr_in, data_r,addr_load_c)
         begin
+        data_n <= data_r;
         -- Manage the input update
         if load_enable = '1' then
             addr_load_n<=addr_load_c + 1;
             data_n(to_integer(unsigned(addr_load_c))) <= IN_data;
         else
             addr_load_n<=addr_load_c;
-            data_n <= data_r;
+            
         end if;
         
         -- Manage the output
