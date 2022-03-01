@@ -9,11 +9,11 @@ use ieee.std_logic_unsigned.all;
 library STD;
 use STD.textio.all;
 
-entity TB_old is
+entity TB_Controller is
 
-end TB_old;
+end TB_Controller;
 
-architecture Structural of TB_old is
+architecture Structural of TB_Controller is
 	-----------------------------------------------------------------------------
 	--SIGNALS
 	-----------------------------------------------------------------------------
@@ -47,22 +47,55 @@ architecture Structural of TB_old is
 	--COMPONENTS
 	-----------------------------------------------------------------------------
 	
-	component TOP_Accelerator is
-		port(
-		clk        : in  	std_logic;                       -- Clock signal
-		rst      : in  		std_logic;                       -- Reset signal
-		IN_read    : in  	std_logic;                       -- Read signal
-		IN_load    : in  	std_logic;                       -- Start loading data signal
-		IN_data_in : in  	std_logic_vector(15 downto 0);   -- Input data to set
-		IN_matrix : in 		std_logic_vector(3 downto 0);  -- Result matrix index
-		OUT_data_out : out 	std_logic_vector(15 downto 0);  -- Output data
-		finish     : out 	std_logic
-		
-			);
-	end component;
+component TOP_TOP is
+    Port (
+        clk        : in  std_logic;                       -- Clock signal
+        rst      : in  std_logic;                       -- Reset signal
+        IN_read    : in  std_logic;                       -- Read signal
+        IN_load    : in  std_logic;                       -- Start loading data signal
+        i0         : in  std_logic; 
+        i1         : in  std_logic;
+        i2         : in  std_logic;
+        i3         : in  std_logic;  -- Input pads to set
+        i4         : in  std_logic;
+        i5         : in  std_logic;
+        i6         : in  std_logic;
+        i7         : in  std_logic;
+        i8         : in  std_logic;
+        i9         : in  std_logic;
+        i10        : in  std_logic;
+        i11        : in  std_logic;
+        i12        : in  std_logic;
+        i13        : in  std_logic;
+        i14        : in  std_logic;
+        i15        : in  std_logic;
+
+
+        o0         : out  std_logic; 
+        o1         : out  std_logic;
+        o2         : out  std_logic;
+        o3         : out  std_logic;  -- OUT pads to set
+        o4         : out  std_logic;
+        o5         : out  std_logic;
+        o6         : out  std_logic;
+        o7         : out  std_logic;
+        o8         : out  std_logic;
+        o9         : out  std_logic;
+        o10        : out  std_logic;
+        o11        : out  std_logic;
+        o12        : out  std_logic;
+        o13        : out  std_logic;
+        o14        : out  std_logic;
+        o15        : out  std_logic;
+        fns        : out  std_logic -- finish signal bit
+        
+        
+    );
+end component;
 ---------------------------------------------------------------------------------
 
     constant Count: integer := 31;
+    constant CLOCK_CYCLE: time := 10 ns;
 
 begin
 --------------------------------------------------------------------------------
@@ -71,23 +104,57 @@ begin
 
    
         
-		top_ac: TOP_Accelerator
+		top_ac: TOP_TOP
 	port map (
 		clk=>clk,
 		rst=>rst,
 		IN_load=>IN_load,
 		IN_read=>IN_read,
-		IN_matrix=>IN_matrix,
-	   IN_data_in=>IN_data,
-	   OUT_data_out=>Out_data,
-	   finish=>finito
+        i0     =>IN_data(0), 
+        i1     =>IN_data(1),
+        i2     =>IN_data(2),
+        i3     =>IN_data(3),  -- Input pads to set
+        i4     =>IN_data(4),
+        i5     =>IN_data(5),
+        i6     =>IN_data(6),
+        i7     =>IN_data(7),
+        i8     =>IN_data(8),
+        i9     =>IN_data(9),
+        i10    =>IN_data(10),
+        i11    =>IN_data(11),
+        i12    =>IN_data(12),
+        i13    =>IN_data(13),
+        i14    =>IN_data(14),
+        i15    =>IN_data(15),
+
+
+        o0     =>Out_data(0), 
+        o1         =>Out_data(1),
+        o2         =>Out_data(2),
+        o3         =>Out_data(3),  -- OUT pads to set
+        o4         =>Out_data(4),
+        o5         =>Out_data(5),
+        o6         =>Out_data(6),
+        o7         =>Out_data(7),
+        o8         =>Out_data(8),
+        o9         =>Out_data(9),
+        o10        =>Out_data(10),
+        o11        =>Out_data(11),
+        o12        =>Out_data(12),
+        o13        =>Out_data(13),
+        o14        =>Out_data(14),
+        o15        =>Out_data(15),
+        fns        =>finito -- finish signal bit
+        
+        
+    );
 	   
-	);
+	
  -----------------------------------------------------------------------------
  -- CLK simulation period 10 ns	
  -----------------------------------------------------------------------------
-     rst <= '1', '0' after 15 ns;
-     clk <= not clk after 5 ns;
+     rst <= '1', '0' after 1.5*CLOCK_CYCLE;
+     clk <= not clk after CLOCK_CYCLE/2 ;
    -----------------------------------------------------------------------------  
 
      stimulus: process
@@ -122,16 +189,16 @@ begin
             IN_load<='1';
           	IN_matrix<=mat;
 
-            wait for 10ns;
+            wait for 1*CLOCK_CYCLE;
           
             IN_load<='0';
             
-            wait for 660ns;
+            wait for 66*CLOCK_CYCLE;
              
              IN_read<='1';
-            wait for 20ns;
+            wait for 2*CLOCK_CYCLE;
             IN_read<='0'; 
-          	wait for 380ns;
+          	wait for 20*CLOCK_CYCLE;
    			mat:=mat+1;
         end loop;
        
@@ -158,15 +225,15 @@ begin
                   write(write_line_cur,outwrite0,right,10);
                   writeline(Fout,write_line_cur);
                   write(write_line_cur,string'("MAC1: "));
-               --   write(write_line_cur,outwrite1,right,10);
+                --  write(write_line_cur,outwrite1,right,10);
                   writeline(Fout,write_line_cur);
                 end if;
 	        end if;
 			end process;
 
-			comb:process(load_en,tb_cnt_r,stimulus_data,IN_load,load_en) is begin
+			comb:process(load_en,tb_cnt_r,stimulus_data,IN_load,load_en,IN_matrix) is begin
 				load_en_n<=load_en;
-				if IN_load='1' and tb_cnt_r=0 then
+				if IN_load='1' and IN_read='0' and tb_cnt_r=0 then
 					load_en_n<='1';
 				elsif tb_cnt_r=15 then
 					load_en_n<='0';
@@ -179,6 +246,9 @@ begin
 	                else
 	                	tb_cnt_n<=0;
 	                end if;
+	            if IN_read='1' then
+	            	IN_data(3 downto 0)<=IN_matrix;
+	            end if;
 			end process;
 			  
 ---------------------------------------------------------------------------------changing input during load	   		

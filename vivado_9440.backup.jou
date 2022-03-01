@@ -1,0 +1,122 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Mon Feb 28 13:14:43 2022
+# Process ID: 9440
+# Current directory: C:/Users/Xristos/Documents/GitHub/ICP_accelerator
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent16156 C:\Users\Xristos\Documents\GitHub\ICP_accelerator\ICP_accelerator.xpr
+# Log file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator/vivado.log
+# Journal file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.xpr
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+update_compile_order -fileset sim_1
+launch_simulation
+launch_simulation
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg
+source TB_Controller.tcl
+run 7.05 us
+relaunch_sim
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg
+source TB_Controller.tcl
+relaunch_sim
+add_bp {C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/simulation/TB_Controller.vhd} 148
+remove_bps -file {C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/simulation/TB_Controller.vhd} -line 148
+update_compile_order -fileset sim_1
+save_wave_config {C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg}
+update_compile_order -fileset sim_1
+close_sim
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg
+source TB_Controller.tcl
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+run 7.05 us
+relaunch_sim
+relaunch_sim
+run 7.05 us
+relaunch_sim
+run 7.05 us
+relaunch_sim
+run 7.05 us
+relaunch_sim
+run 7.05 us
+relaunch_sim
+run 7.05 us
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+save_wave_config {C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg}
+close_sim
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg
+source TB_Controller.tcl
+close_sim
+launch_simulation
+open_wave_config C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg
+source TB_Controller.tcl
+relaunch_sim
+relaunch_sim
+relaunch_sim
+save_wave_config {C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg
+source TB_Controller.tcl
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+run 7.05 us
+relaunch_sim
+relaunch_sim
+relaunch_sim
+relaunch_sim
+save_wave_config {C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg}
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/Xristos/Documents/GitHub/ICP_accelerator/TB_Controller_behav.wcfg
+source TB_Controller.tcl
+run 7.05 us
+run 7.05 us
+relaunch_sim
+relaunch_sim
+run 7.05 us
+relaunch_sim
+run 7.05 us
+close_sim

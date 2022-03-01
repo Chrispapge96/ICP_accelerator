@@ -43,7 +43,7 @@ entity TOP_TOP is
         o13        : out  std_logic;
         o14        : out  std_logic;
         o15        : out  std_logic;
-        fns        : out  std_logic; -- finish signal bit
+        fns        : out  std_logic -- finish signal bit
         
         
     );
@@ -57,7 +57,8 @@ architecture Structural of TOP_TOP is
 --------------------------------------------------------------------------------
     signal IN_bits,Out_bits : std_logic_vector(15 downto 0);
     signal matrix_bits: std_logic_vector(3 downto 0);
-
+    signal finito,clk_sig,rst_sig, In_read_sig, IN_load_sig: std_logic;
+  
 --------------------------------------------------------------------------------
 -- -- Components
 --------------------------------------------------------------------------------
@@ -70,9 +71,9 @@ architecture Structural of TOP_TOP is
             IN_load    : in  std_logic;                       -- Start loading data signal
             IN_data_in : in  std_logic_vector(15 downto 0);   -- Input data to set
             IN_matrix : in std_logic_vector(3 downto 0);  -- Result matrix index
-            OUT_data_out : out std_logic_vector(31 downto 0);  -- Output data
-            finish     : out std_logic;
-            load_enable: out std_logic -- for the testbench
+            OUT_data_out : out std_logic_vector(15 downto 0);  -- Output data
+            finish     : out std_logic
+            
             
         );
     end component;
@@ -81,7 +82,7 @@ architecture Structural of TOP_TOP is
 
         Port(
              PADIO      :in std_logic;
-             COREIO     :out std_logic;
+             COREIO     :out std_logic
         );
     end component;
 
@@ -90,7 +91,7 @@ architecture Structural of TOP_TOP is
 
         Port(
              PADIO      :out std_logic;
-             COREIO     :in std_logic;
+             COREIO     :in std_logic
         );
     end component;
 
@@ -193,7 +194,7 @@ begin
         inpad13: CPAD_S_74x50u_IN
     port map(
         PADIO=>i13,
-        COREIO=>IN_bits(13);
+        COREIO=>IN_bits(13)
      
     );
 
@@ -214,59 +215,30 @@ begin
         clk_pad: CPAD_S_74x50u_IN
     port map(
         PADIO=>clk,
-        COREIO=>clk
+        COREIO=>clk_sig
      
     );
 
         load_pad: CPAD_S_74x50u_IN
     port map(
         PADIO=>IN_load,
-        COREIO=>IN_load
+        COREIO=>IN_load_sig
      
     );
 
         read_pad: CPAD_S_74x50u_IN
     port map(
         PADIO=>IN_read,
-        COREIO=>IN_read
+        COREIO=>IN_read_sig
      
     );
 
         rst_pad: CPAD_S_74x50u_IN
     port map(
-        PADIO=>IN_load,
-        COREIO=>IN_load
+        PADIO=>rst,
+        COREIO=>rst_sig
      
     );
-
-        matrix0: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>m0,
-        COREIO=>matrix_bits(0)
-     
-    );
-
-        matrix1: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>m1,
-        COREIO=>matrix_bits(1)
-     
-    );
-
-        matrix2: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>m2,
-        COREIO=>matrix_bits(2)
-     
-    );
-
-        matrix3: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>m3,
-        COREIO=>matrix_bits(3)
-     
-    );
-
 
 ---------------------------------------------------------------------------------
 -- -- OUT
@@ -385,12 +357,6 @@ begin
      
     );
 
-        Outpad15: CPAD_S_74x50u_OUT
-    port map(
-        PADIO=>o15,
-        COREIO=>Out_bits(15)
-     
-    );
 
         Finish_bit: CPAD_S_74x50u_OUT
     port map(
@@ -405,10 +371,10 @@ begin
 
             top_ac: TOP_Accelerator
     port map (
-        clk=>clk,
-        rst=>rst,
-        IN_load=>IN_load,
-        IN_read=>IN_read,
+        clk=>clk_sig,
+        rst=>rst_sig,
+        IN_load=>IN_load_sig,
+        IN_read=>IN_read_sig,
         IN_matrix=>matrix_bits,
         IN_data_in=>IN_bits,
         OUT_data_out=>Out_bits,
