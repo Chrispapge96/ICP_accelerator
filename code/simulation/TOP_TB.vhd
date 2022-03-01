@@ -231,7 +231,7 @@ begin
 	        end if;
 			end process;
 
-			comb:process(load_en,tb_cnt_r,stimulus_data,IN_load,load_en,IN_matrix) is begin
+			comb:process(load_en,tb_cnt_r,stimulus_data,IN_load,load_en,IN_matrix,IN_read) is begin
 				load_en_n<=load_en;
 				if IN_load='1' and IN_read='0' and tb_cnt_r=0 then
 					load_en_n<='1';

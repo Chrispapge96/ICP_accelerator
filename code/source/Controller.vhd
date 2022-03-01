@@ -33,7 +33,7 @@ architecture Behavioral of Controller is
 	signal addr_ram_r_n,addr_ram_r,addr_ram_w_n,addr_ram_w  :	std_logic_vector(7 downto 0);
 	signal cnt_r,cnt_n 																			: std_logic_vector(5 downto 0);
 	signal web_s																						:	std_logic_vector(1 downto 0);
-
+	--signal IN_matrix_c,IN_matrix_n													: std_logic_vector(3 downto 0);
 	begin
 -------------------------------------------------------------------------------	
 --Sequential part
@@ -45,11 +45,13 @@ architecture Behavioral of Controller is
 				cnt_r<=(others=>'0');
 				addr_ram_r<=(others=>'0');
 				addr_ram_w<=(others=>'0');
+				IN_matrix_c<=(others=>'0');
 			else
 				state_cur<=state_next;
 				cnt_r<=cnt_n;
 				addr_ram_r<=addr_ram_r_n;
 				addr_ram_w<=addr_ram_w_n;
+				IN_matrix_c<=IN_matrix_n;
 			end if;
 		end if;
 	end process;
@@ -109,7 +111,7 @@ architecture Behavioral of Controller is
 --------------------------------------------------------------------------------
 --Output of each state
 --------------------------------------------------------------------------------
-	Operation_of_each_state: process(state_cur,addr_ram_r,IN_matrix,cnt_r,addr_ram_w,web_s) is begin
+	Operation_of_each_state: process(state_cur,addr_ram_r,cnt_r,addr_ram_w,web_s,IN_read) is begin
 	option<='0';
 	en_diag<='0'; 
 	enable_MAC<='0';
@@ -122,15 +124,20 @@ architecture Behavioral of Controller is
 	addr_ram_w_n<=addr_ram_w;
 		case state_cur is
 			when IDLE =>
+
 			  load_enable<='0';
 				cnt_n<=(others=>'0');
 				web_s<="11";
 				-- goes to MAC unit sumReg_n<=(others=>'0'); 
-				addr_ram_r_n <='0' & IN_matrix & IN_matrix(2 downto 0);-- Because we save 9 rows for each matrix
+				if IN_read='1'then
+					addr_ram_r_n <='0' & IN_matrix & IN_matrix(2 downto 0);-- Because we save 9 rows for each matrix
+				end if;
 			when READ =>
 				load_enable<='0';
 				addr_ram<=addr_ram_r;
-				addr_ram_r_n<=addr_ram_r + '1';
+				if cnt_r(0)='1' then
+					addr_ram_r_n<=addr_ram_r + '1';
+				end if;
 				cnt_n<=cnt_r+1;
 				web_s<="10";
 			when LOAD =>
