@@ -66,11 +66,11 @@
         `define functional
 `endif
 `celldefine
-`suppress_faults
-`enable_portfaults
+//`suppress_faults
+//`enable_portfaults
 `ifdef functional
    `timescale 1ns / 1ns
-   `delay_mode_unit
+   ////`delay_mode_unit
 `endif
 
 `ifdef functional
@@ -3071,11 +3071,11 @@ endmodule
         `define functional
 `endif
 `celldefine
-`suppress_faults
-`enable_portfaults
+//`suppress_faults
+//`enable_portfaults
 `ifdef functional
    `timescale 1ns / 1ns
-   `delay_mode_unit
+   //`delay_mode_unit
 `endif
 
 `ifdef functional
@@ -6634,11 +6634,11 @@ endmodule
         `define functional
 `endif
 `celldefine
-`suppress_faults
-`enable_portfaults
+//`suppress_faults
+//`enable_portfaults
 `ifdef functional
    `timescale 1ns / 1ns
-   `delay_mode_unit
+   //`delay_mode_unit
 `endif
 
 `ifdef functional
@@ -10534,11 +10534,11 @@ endmodule
         `define functional
 `endif
 `celldefine
-`suppress_faults
-`enable_portfaults
+//`suppress_faults
+//`enable_portfaults
 `ifdef functional
    `timescale 1ns / 1ns
-   `delay_mode_unit
+   //`delay_mode_unit
 `endif
 
 `ifdef functional
@@ -13547,11 +13547,11 @@ endmodule
         `define functional
 `endif
 `celldefine
-`suppress_faults
-`enable_portfaults
+////`suppress_faults
+//`enable_portfaults
 `ifdef functional
    `timescale 1ns / 1ns
-   `delay_mode_unit
+   //`delay_mode_unit
 `endif
 
 `ifdef functional

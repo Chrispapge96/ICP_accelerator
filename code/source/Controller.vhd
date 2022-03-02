@@ -45,13 +45,13 @@ architecture Behavioral of Controller is
 				cnt_r<=(others=>'0');
 				addr_ram_r<=(others=>'0');
 				addr_ram_w<=(others=>'0');
-				IN_matrix_c<=(others=>'0');
+				
 			else
 				state_cur<=state_next;
 				cnt_r<=cnt_n;
 				addr_ram_r<=addr_ram_r_n;
 				addr_ram_w<=addr_ram_w_n;
-				IN_matrix_c<=IN_matrix_n;
+				
 			end if;
 		end if;
 	end process;

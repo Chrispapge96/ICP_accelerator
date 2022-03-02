@@ -123,6 +123,7 @@ architecture Structural of TOP_Accelerator is
 	signal  load_en:    	std_logic;
 	signal  outRAM: 			std_logic_vector(31 downto 0);
 	signal LOW  : std_logic;
+	
 	begin
 
 			LOW  <= '0';
