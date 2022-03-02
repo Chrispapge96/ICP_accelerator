@@ -21,7 +21,7 @@ entity TOP_Accelerator is
 					IN_load    : in  std_logic;                       -- Start loading data signal
 					IN_data_in : in  std_logic_vector(7 downto 0);   -- Input data to set
 					IN_matrix : in std_logic_vector(3 downto 0);  -- Result matrix index
-					OUT_data_out : out std_logic_vector(15 downto 0);  -- Output data
+					OUT_data_out : out std_logic_vector(8 downto 0);  -- Output data
 					finish     : out std_logic
 				);
 end TOP_Accelerator;
@@ -62,7 +62,7 @@ architecture Structural of TOP_Accelerator is
 						option 			:	in std_logic_vector(1 downto 0);
 						enable			:	in std_logic;
 						dataROM     : in std_logic_vector (11 downto 0);    -- 2 7bits words from ROM
-						in_data     : in std_logic_vector (15 downto 0);    -- 2 8bits words from inpuyt buffer
+						in_data_mac : in std_logic_vector (15 downto 0);    -- 2 8bits words from inpuyt buffer
 						dataRAM     : out std_logic_vector (31 downto 0)    -- 16bit result
 					);
 	end component;
@@ -112,7 +112,7 @@ END component;
 	signal	rst_sumReg: 	std_logic;
 	signal  enable_ROM: 	std_logic;
 	signal  dataROM:    	std_logic_vector(11 downto 0);
-	signal  data_in:    	std_logic_vector(7 downto 0);
+	signal	data_to_MAC:  std_logic_vector(15 downto 0);
 	signal  dataRAM:    	std_logic_vector(31 downto 0);
 	signal  ready:      	std_logic;
 	
@@ -169,7 +169,7 @@ END component;
 							en_diag   => en_diag,
 							enable		=>enable_MAC,
 							option    =>option,
-							in_data		=> data_in,
+							in_data_mac		=> data_to_MAC,
 							dataRAM		=> dataRAM
 		);
 		-- Setup the input registers
@@ -179,7 +179,7 @@ END component;
 							load_enable	=> load_en,
 							IN_data		=> IN_data_in,
 							addr_in		=> addr_in,
-							data		=> data_in
+							data		=> data_to_MAC
 		);
 		
 	    RAM              : ST_SPHDL_160x32m8_L 

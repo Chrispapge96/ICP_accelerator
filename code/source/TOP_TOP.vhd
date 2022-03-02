@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 
-entity TOP_TOP is
+entity TIP_TOP is
     Port (
         clk        : in  std_logic;                       -- Clock signal
         rst      : in  std_logic;                       -- Reset signal
@@ -34,15 +34,16 @@ entity TOP_TOP is
         
         
     );
-end TOP_TOP;
+end TIP_TOP;
 
 
-architecture Structural of TOP_TOP is
+architecture Structural of TIP_TOP is
 
 --------------------------------------------------------------------------------
 -- -- Signals
 --------------------------------------------------------------------------------
-    signal IN_bits,Out_bits : std_logic_vector(15 downto 0);
+    signal IN_bits : std_logic_vector(7 downto 0);
+    signal Out_bits : std_logic_vector(8 downto 0);
     signal matrix_bits: std_logic_vector(3 downto 0);
     signal finito,clk_sig,rst_sig, In_read_sig, IN_load_sig: std_logic;
   
@@ -56,9 +57,9 @@ architecture Structural of TOP_TOP is
             rst      : in  std_logic;                       -- Reset signal
             IN_read    : in  std_logic;                       -- Read signal
             IN_load    : in  std_logic;                       -- Start loading data signal
-            IN_data_in : in  std_logic_vector(15 downto 0);   -- Input data to set
+            IN_data_in : in  std_logic_vector(7 downto 0);   -- Input data to set
             IN_matrix : in std_logic_vector(3 downto 0);  -- Result matrix index
-            OUT_data_out : out std_logic_vector(15 downto 0);  -- Output data
+            OUT_data_out : out std_logic_vector(8 downto 0);  -- Output data
             finish     : out std_logic
             
             
@@ -258,8 +259,8 @@ begin
         IN_load=>IN_load_sig,
         IN_read=>IN_read_sig,
         IN_matrix=>matrix_bits,
-        IN_data_in=>IN_bits(15 downto 0),
-        OUT_data_out=>Out_bits(15 downto 0),
+        IN_data_in=>IN_bits(7 downto 0),
+        OUT_data_out=>Out_bits(8 downto 0),
         finish=>finito
        
     );

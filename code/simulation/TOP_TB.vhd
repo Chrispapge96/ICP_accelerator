@@ -9,11 +9,11 @@ use ieee.std_logic_unsigned.all;
 library STD;
 use STD.textio.all;
 
-entity TB_Controller is
+entity TB_TIP_TOP is
 
-end TB_Controller;
+end TB_TIP_TOP;
 
-architecture Structural of TB_Controller is
+architecture Structural of TB_TIP_TOP is
 	-----------------------------------------------------------------------------
 	--SIGNALS
 	-----------------------------------------------------------------------------
@@ -47,7 +47,7 @@ architecture Structural of TB_Controller is
 	--COMPONENTS
 	-----------------------------------------------------------------------------
 	
-component TOP_TOP is
+component TIP_TOP is
     Port (
         clk        : in  std_logic;                       -- Clock signal
         rst      : in  std_logic;                       -- Reset signal
@@ -92,7 +92,7 @@ begin
 
    
         
-		top_ac: TOP_TOP
+		top_ac: TIP_TOP
 	port map (
 		clk=>clk,
 		rst=>rst,

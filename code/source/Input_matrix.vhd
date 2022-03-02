@@ -13,7 +13,7 @@ entity Input_Matrix is
         clk         : in std_logic;     -- Clock input
         rst         : in std_logic;     -- Reset input
         load_enable : in std_logic;     -- Writing enable bit
-        IN_data     : in std_logic_vector(15 downto 0);    -- Input data
+        IN_data     : in std_logic_vector(7 downto 0);    -- Input data
         addr_in     : in std_logic_vector ((integer(ceil(log2(real(WORD_LENGTH )))) - 1) downto 0);     -- Addres to output
         data        : out std_logic_vector (WORD_LENGTH-1 downto 0)    -- Output data
 
@@ -32,7 +32,7 @@ architecture behavioral of Input_Matrix is
 
     -- Signal definition
     signal data_r, data_n   : t_Memory;
-    signal addr_load_c, addr_load_n: std_logic_vector(3 downto 0);--count for loading
+    signal addr_load_c, addr_load_n: std_logic_vector(4 downto 0);--count for loading
 begin
     -- Register management process
     register_process : process(clk, rst)
@@ -57,7 +57,11 @@ begin
         -- Manage the input update
         if load_enable = '1' then
             addr_load_n<=addr_load_c + 1;
-            data_n(to_integer(unsigned(addr_load_c))) <= IN_data;
+            if addr_load_c(0)='0' then
+                data_n(to_integer(unsigned(addr_load_c(3 downto 0)))) <= data_r(to_integer(unsigned(addr_load_c(3 downto 0)))) & IN_data;
+            else
+                data_n(to_integer(unsigned(addr_load_c(3 downto 0)))) <= IN_data & data_r(to_integer(unsigned(addr_load_c(3 downto 0))));
+            end if;
         else
             addr_load_n<=addr_load_c;
             
