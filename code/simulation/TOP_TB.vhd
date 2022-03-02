@@ -25,8 +25,9 @@ architecture Structural of TB_TIP_TOP is
 	signal stimulus_data:		std_logic_vector(255  downto 0):=(others=>'0');
     signal IN_data:   			std_logic_vector(7 downto 0):=(others=>'0');
 	signal Out_data:   			std_logic_vector(8 downto 0);
+	signal output_c,output_n:	std_logic_vector(8 downto 0);
 	signal finito:     			std_logic:='0';
-	signal load_en,load_en_n:			std_logic:='0';
+	signal load_en,load_en_n,read_en,read_en_n:			std_logic:='0';
 	signal tb_cnt_r,tb_cnt_n:	integer:=0;
 
     signal outwrite0,outwrite1                           : integer:= 0;
@@ -180,7 +181,7 @@ begin
      end process;
 
      
-       seq: process(clk,rst) is 
+       seq: process(clk,rst,read_en,cnt_r) is 
        		file Fout: TEXT open WRITE_MODE is "C:\Users\Xristos\Documents\GitHub\ICP_accelerator\code\simulation\output.txt";
   			variable write_line_cur: line;
             --variable tb_cnt: integer := 0;
@@ -190,45 +191,58 @@ begin
   				if rst='1' then
   				tb_cnt_r<=0;
   				load_en<='0';
+  				read_en<='0';
+  				output_c<=(others=>'0');
   				else
   				tb_cnt_r<=tb_cnt_n;
-  				
+  				read_en<=read_en_n;
   				load_en<=load_en_n;
+  				output_c<=output_n;
   				end if;
-                if outwrite0 > 0 then
-                  write(write_line_cur,string'("MAC0: "));
+                if outwrite0 > 0 and read_en='1' and if (cnt_r mod 2)=1 then
+                  write(write_line_cur,string'("Element: "));
                   write(write_line_cur,outwrite0,right,10);
-                  writeline(Fout,write_line_cur);
-                  write(write_line_cur,string'("MAC1: "));
-                --  write(write_line_cur,outwrite1,right,10);
                   writeline(Fout,write_line_cur);
                 end if;
 	        end if;
 			end process;
 
-			comb:process(load_en,tb_cnt_r,stimulus_data,IN_load,load_en,IN_matrix,IN_read) is begin
+			comb:process(load_en,tb_cnt_r,stimulus_data,IN_load,load_en,IN_matrix,IN_read,read_en,Out_data) is begin
+				read_en_n<=read_en;
 				load_en_n<=load_en;
+				----------------------------------------------------------------
 				if IN_load='1' and IN_read='0' and tb_cnt_r=0 then
 					load_en_n<='1';
 				elsif tb_cnt_r=31 then
-					load_en_n<='0';
+					load_en_n<='0';								--loading
 				end if;
 
 				if load_en='1' then
-	                    tb_cnt_n<=tb_cnt_r+1;
-	                    
-	                    IN_data<=stimulus_data((7+8*(tb_cnt_r)) downto ((tb_cnt_r)*8));
-	                else
-	                	tb_cnt_n<=0;
-	                end if;
-	            if IN_read='1' then
+                    tb_cnt_n<=tb_cnt_r+1;
+                    IN_data<=stimulus_data((7+8*(tb_cnt_r)) downto ((tb_cnt_r)*8));
+                else
+                	tb_cnt_n<=0;
+                end if;
+                ----------------------------------------------------------------
+	            if IN_read='1' and tb_cnt_r=0 then
 	            	IN_data(3 downto 0)<=IN_matrix;
+	            	read_en_n<='1';
+	            elsif (tb_cnt_r=37) then
+	            	read_en_n<='0';								--reading
 	            end if;
+
+            	if read_en='1' then
+            		tb_cnt_n<=tb_cnt_r+1;
+            	else 
+            		tb_cnt_n<=0;
+            	end if;
+            	----------------------------------------------------------------
+	            output_n<=Out_data;
+
 			end process;
 			  
 ---------------------------------------------------------------------------------changing input during load	   		
-			outwrite0<=to_integer(unsigned(Out_data(15 downto 0)));
-   			--outwrite1<=to_integer(unsigned(Out_data(31 downto 16)));
+			outwrite0<=to_integer(unsigned(Out_data & output_c));
 
 
    
