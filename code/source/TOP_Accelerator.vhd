@@ -19,7 +19,7 @@ entity TOP_Accelerator is
 					rst      : in  std_logic;                       -- Reset signal
 					IN_read    : in  std_logic;                       -- Read signal
 					IN_load    : in  std_logic;                       -- Start loading data signal
-					IN_data_in : in  std_logic_vector(15 downto 0);   -- Input data to set
+					IN_data_in : in  std_logic_vector(7 downto 0);   -- Input data to set
 					IN_matrix : in std_logic_vector(3 downto 0);  -- Result matrix index
 					OUT_data_out : out std_logic_vector(15 downto 0);  -- Output data
 					finish     : out std_logic
@@ -42,9 +42,9 @@ architecture Structural of TOP_Accelerator is
 	          addr_In       :	out std_logic_vector(3 downto 0);
 	          addr_rom      :	out std_logic_vector(3 downto 0);
 	          rst_sumReg    :	out std_logic;
-	          option 				: out std_logic;
+	          option 				: out std_logic_vector(1 downto 0);
 	          load_enable   : out std_logic;
-	          RAM_part      : out std_logic;
+	          
 	          en_diag 			: out std_logic;
 	          enable_MAC		:	out std_logic;
 	          finish        : out std_logic
@@ -57,9 +57,9 @@ architecture Structural of TOP_Accelerator is
 						clk         : in std_logic; -- Clock signal
 						rst         : in std_logic; -- Reset signal
 						init_mac    : in std_logic; -- Reset the accumulation
-						RAM_part		: in std_logic;
+					
 						en_diag			:	in std_logic;
-						option 			:	in std_logic;
+						option 			:	in std_logic_vector(1 downto 0);
 						enable			:	in std_logic;
 						dataROM     : in std_logic_vector (11 downto 0);    -- 2 7bits words from ROM
 						in_data     : in std_logic_vector (15 downto 0);    -- 2 8bits words from inpuyt buffer
@@ -73,7 +73,7 @@ architecture Structural of TOP_Accelerator is
 						clk         : in std_logic;
 						rst         : in std_logic;
 						load_enable : in std_logic;
-						IN_data     : in std_logic_vector(15 downto 0);        
+						IN_data     : in std_logic_vector(7 downto 0);        
 						addr_in     : in std_logic_vector (3 downto 0);
 						data        : out std_logic_vector (15 downto 0)
 					);
@@ -81,25 +81,25 @@ architecture Structural of TOP_Accelerator is
 
 	component ROM is
 	     Port ( 
-	          clk         : in std_logic;
+	         
 	          enable_ROM  : in std_logic;
 	          addr_ROM    : in std_logic_vector (3 downto 0); 
 	          dataROM     : out std_logic_vector (11 downto 0)
 	        );
 	end component;
 
-
-	component SRAM_SP_WRAPPER is
-	  port (
-	    ClkxCI  : in  std_logic;
-	    CSxSI   : in  std_logic;            -- Active Low
-	    WExSI   : in  std_logic;            --Active Low
-	    AddrxDI : in  std_logic_vector (7 downto 0);
-	    RYxSO   : out std_logic;
-	    DataxDI : in  std_logic_vector (31 downto 0);
-	    DataxDO : out std_logic_vector (31 downto 0)
-	    );
-	end component;
+	component ST_SPHDL_160x32m8_L is
+    PORT (
+        Q : OUT std_logic_vector(31 DOWNTO 0);
+        RY : OUT std_logic;
+        CK : IN std_logic;
+        CSN : IN std_logic;
+        TBYPASS : IN std_logic;
+        WEN : IN std_logic;
+        A : IN std_logic_vector(7 DOWNTO 0);
+        D : IN std_logic_vector(31 DOWNTO 0)   
+) ;    
+END component;
 
 
 
@@ -112,18 +112,18 @@ architecture Structural of TOP_Accelerator is
 	signal	rst_sumReg: 	std_logic;
 	signal  enable_ROM: 	std_logic;
 	signal  dataROM:    	std_logic_vector(11 downto 0);
-	signal  data_in:    	std_logic_vector(15 downto 0);
+	signal  data_in:    	std_logic_vector(7 downto 0);
 	signal  dataRAM:    	std_logic_vector(31 downto 0);
 	signal  ready:      	std_logic;
-	signal  RAM_part:   	std_logic;
-	signal	option:				std_logic;
+	
+	signal	option:				std_logic_vector(1 downto 0);
 	signal	enable_MAC:		std_logic;
 	signal  en_diag:			std_logic;
 	signal  finito:     	std_logic;
 	signal  load_en:    	std_logic;
 	signal  outRAM: 			std_logic_vector(31 downto 0);
 	signal LOW  : std_logic;
-	
+
 	begin
 
 			LOW  <= '0';
@@ -145,7 +145,7 @@ architecture Structural of TOP_Accelerator is
 	            addr_rom=>addr_rom,
 	            rst_sumReg=>rst_sumReg,
 	            load_enable=>load_en,
-	            RAM_part=>RAM_part,
+	            
 	            option=>option,
 	            en_diag=>en_diag,
 	            enable_MAC=>enable_MAC,
@@ -164,7 +164,7 @@ architecture Structural of TOP_Accelerator is
 							clk			=> clk,
 							rst		    => rst,
 							init_mac	=> rst_sumReg,
-							RAM_part	=> RAM_part,
+							
 							dataROM		=> dataROM,
 							en_diag   => en_diag,
 							enable		=>enable_MAC,
@@ -201,9 +201,9 @@ architecture Structural of TOP_Accelerator is
 
 	  	out_logic: process(addr_rom,outRAM) is begin
 	  		if addr_rom(0)='0' then
-	  			OUT_data_out<=outRAM(15 downto 0);
+	  			OUT_data_out<=outRAM(8 downto 0);
 	  		else
-	  			OUT_data_out<=outRAM(31 downto 16);
+	  			OUT_data_out<=outRAM(17 downto 9);
 	  		end if;
 	  	end process;
 	--------------------------------------------------------------------------------

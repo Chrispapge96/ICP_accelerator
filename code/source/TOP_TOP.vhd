@@ -12,37 +12,24 @@ entity TOP_TOP is
         i0         : in  std_logic; 
         i1         : in  std_logic;
         i2         : in  std_logic;
-        i3         : in  std_logic;  -- Input pads to set
+        i3         : in  std_logic;  -- 8 Input pads to set
         i4         : in  std_logic;
         i5         : in  std_logic;
         i6         : in  std_logic;
         i7         : in  std_logic;
-        i8         : in  std_logic;
-        i9         : in  std_logic;
-        i10        : in  std_logic;
-        i11        : in  std_logic;
-        i12        : in  std_logic;
-        i13        : in  std_logic;
-        i14        : in  std_logic;
-        i15        : in  std_logic;
+
 
 
         o0         : out  std_logic; 
-        o1         : out  std_logic;
+        o1         : out  std_logic; 
         o2         : out  std_logic;
-        o3         : out  std_logic;  -- OUT pads to set
+        o3         : out  std_logic;  -- 9 OUT pads to set
         o4         : out  std_logic;
         o5         : out  std_logic;
         o6         : out  std_logic;
         o7         : out  std_logic;
         o8         : out  std_logic;
-        o9         : out  std_logic;
-        o10        : out  std_logic;
-        o11        : out  std_logic;
-        o12        : out  std_logic;
-        o13        : out  std_logic;
-        o14        : out  std_logic;
-        o15        : out  std_logic;
+
         fns        : out  std_logic -- finish signal bit
         
         
@@ -156,62 +143,6 @@ begin
      
     );
 
-        inpad8: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>i8,
-        COREIO=>IN_bits(8)
-     
-    );
-
-        inpad9: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>i9,
-        COREIO=>IN_bits(9)
-     
-    );
-
-        inpad10: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>i10,
-        COREIO=>IN_bits(10)
-     
-    );
-
-        inpa11: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>i11,
-        COREIO=>IN_bits(11)
-     
-    );
-
-        inpad12: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>i12,
-        COREIO=>IN_bits(12)
-     
-    );
-
-        inpad13: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>i13,
-        COREIO=>IN_bits(13)
-     
-    );
-
-        inpad14: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>i14,
-        COREIO=>IN_bits(14)
-     
-    );
-
-        inpad15: CPAD_S_74x50u_IN
-    port map(
-        PADIO=>i15,
-        COREIO=>IN_bits(15)
-     
-    );
-
         clk_pad: CPAD_S_74x50u_IN
     port map(
         PADIO=>clk,
@@ -305,55 +236,6 @@ begin
     port map(
         PADIO=>o8,
         COREIO=>Out_bits(8)
-     
-    );
-
-        Outpad9: CPAD_S_74x50u_OUT
-    port map(
-        PADIO=>o9,
-        COREIO=>Out_bits(9)
-     
-    );
-
-        Outpad10: CPAD_S_74x50u_OUT
-    port map(
-        PADIO=>o10,
-        COREIO=>Out_bits(10)
-     
-    );
-
-        Outpad11: CPAD_S_74x50u_OUT
-    port map(
-        PADIO=>o11,
-        COREIO=>Out_bits(11)
-     
-    );
-
-        Outpad12: CPAD_S_74x50u_OUT
-    port map(
-        PADIO=>o12,
-        COREIO=>Out_bits(12)
-     
-    );
-
-        Outpad13: CPAD_S_74x50u_OUT
-    port map(
-        PADIO=>o13,
-        COREIO=>Out_bits(13)
-     
-    );
-
-        Outpad14: CPAD_S_74x50u_OUT
-    port map(
-        PADIO=>o14,
-        COREIO=>Out_bits(14)
-     
-    );
-
-            Outpad15: CPAD_S_74x50u_OUT
-    port map(
-        PADIO=>o15,
-        COREIO=>Out_bits(15)
      
     );
 

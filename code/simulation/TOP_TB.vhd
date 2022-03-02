@@ -23,8 +23,8 @@ architecture Structural of TB_Controller is
 	signal IN_load: 			std_logic:='0';
 	signal IN_matrix: 			std_logic_vector(3 downto 0):="0000";
 	signal stimulus_data:		std_logic_vector(255  downto 0):=(others=>'0');
-    signal IN_data:   			std_logic_vector(15 downto 0):=(others=>'0');
-	signal Out_data:   			std_logic_vector(15 downto 0);
+    signal IN_data:   			std_logic_vector(7 downto 0):=(others=>'0');
+	signal Out_data:   			std_logic_vector(8 downto 0);
 	signal finito:     			std_logic:='0';
 	signal load_en,load_en_n:			std_logic:='0';
 	signal tb_cnt_r,tb_cnt_n:	integer:=0;
@@ -61,14 +61,8 @@ component TOP_TOP is
         i5         : in  std_logic;
         i6         : in  std_logic;
         i7         : in  std_logic;
-        i8         : in  std_logic;
-        i9         : in  std_logic;
-        i10        : in  std_logic;
-        i11        : in  std_logic;
-        i12        : in  std_logic;
-        i13        : in  std_logic;
-        i14        : in  std_logic;
-        i15        : in  std_logic;
+
+
 
 
         o0         : out  std_logic; 
@@ -80,13 +74,7 @@ component TOP_TOP is
         o6         : out  std_logic;
         o7         : out  std_logic;
         o8         : out  std_logic;
-        o9         : out  std_logic;
-        o10        : out  std_logic;
-        o11        : out  std_logic;
-        o12        : out  std_logic;
-        o13        : out  std_logic;
-        o14        : out  std_logic;
-        o15        : out  std_logic;
+
         fns        : out  std_logic -- finish signal bit
         
         
@@ -118,17 +106,10 @@ begin
         i5     =>IN_data(5),
         i6     =>IN_data(6),
         i7     =>IN_data(7),
-        i8     =>IN_data(8),
-        i9     =>IN_data(9),
-        i10    =>IN_data(10),
-        i11    =>IN_data(11),
-        i12    =>IN_data(12),
-        i13    =>IN_data(13),
-        i14    =>IN_data(14),
-        i15    =>IN_data(15),
 
 
-        o0     =>Out_data(0), 
+
+        o0   	   =>Out_data(0), 
         o1         =>Out_data(1),
         o2         =>Out_data(2),
         o3         =>Out_data(3),  -- OUT pads to set
@@ -137,13 +118,7 @@ begin
         o6         =>Out_data(6),
         o7         =>Out_data(7),
         o8         =>Out_data(8),
-        o9         =>Out_data(9),
-        o10        =>Out_data(10),
-        o11        =>Out_data(11),
-        o12        =>Out_data(12),
-        o13        =>Out_data(13),
-        o14        =>Out_data(14),
-        o15        =>Out_data(15),
+
         fns        =>finito -- finish signal bit
         
         
@@ -193,12 +168,12 @@ begin
           
             IN_load<='0';
             
-            wait for 66*CLOCK_CYCLE;
+            wait for 83*CLOCK_CYCLE;
              
              IN_read<='1';
             wait for 2*CLOCK_CYCLE;
             IN_read<='0'; 
-          	wait for 20*CLOCK_CYCLE;
+          	wait for 37*CLOCK_CYCLE;
    			mat:=mat+1;
         end loop;
        
@@ -235,14 +210,14 @@ begin
 				load_en_n<=load_en;
 				if IN_load='1' and IN_read='0' and tb_cnt_r=0 then
 					load_en_n<='1';
-				elsif tb_cnt_r=15 then
+				elsif tb_cnt_r=31 then
 					load_en_n<='0';
 				end if;
 
 				if load_en='1' then
 	                    tb_cnt_n<=tb_cnt_r+1;
 	                    
-	                    IN_data<=stimulus_data((15+16*(tb_cnt_r)) downto ((tb_cnt_r)*16));
+	                    IN_data<=stimulus_data((7+8*(tb_cnt_r)) downto ((tb_cnt_r)*8));
 	                else
 	                	tb_cnt_n<=0;
 	                end if;
