@@ -27,12 +27,12 @@ end Controller;
 architecture Behavioral of Controller is
  
 	type state_of_operation is (IDLE,OP,LOAD,SAVE,SAVE_last,SAVE_extra,FINISHED,READ,READ_Init);
-	signal state_cur, state_next														: state_of_operation;
+	signal state_cur, state_next				: state_of_operation;
 
 	signal addr_ram_r_n,addr_ram_r,addr_ram_w_n,addr_ram_w  :	std_logic_vector(7 downto 0);
-	signal cnt_r,cnt_n 																			: std_logic_vector(7 downto 0);
-	signal web_s																						:	std_logic_vector(1 downto 0);
-	--signal IN_matrix_c,IN_matrix_n													: std_logic_vector(3 downto 0);
+	signal cnt_r,cnt_n 					: 	std_logic_vector(5 downto 0);
+	signal web_s						:	std_logic_vector(1 downto 0);
+
 	begin
 -------------------------------------------------------------------------------	
 --Sequential part
@@ -83,21 +83,14 @@ architecture Behavioral of Controller is
 			end if;
 		  --
 		elsif state_cur=READ_Init then
-			if cnt_r(0)='1' then
 				state_next<=READ;
-			else
-				state_next<=state_cur;
-			end if;
+
 			--
 		elsif state_cur=READ then
-			if cnt_r(7 downto 0)="10001111" then
+			if cnt_r(5 downto 0)="100101" then
 				state_next<=IDLE;
 			else
-					if cnt_r(0)='1' then
-						state_next<=READ_Init;
-					else
-						state_next<=state_cur;
-					end if;
+				state_next<=state_cur;
 			end if;
 			--
 		elsif state_cur=LOAD then
@@ -161,8 +154,8 @@ architecture Behavioral of Controller is
 				end if;
 
 			when READ_Init =>
-				cnt_n<=cnt_r+1;
-				web_s<="10";									--gives 2 clk for intialization
+				web_s<="10";
+				cnt_n<=cnt_r+1;		
 				load_enable<='0';
 				addr_ram<=addr_ram_r;
 
@@ -180,11 +173,11 @@ architecture Behavioral of Controller is
 				load_enable<='1';
 				cnt_n<=cnt_r+1;
 				if cnt_r(5 downto 0) = "010000" then
-					cnt_n<="0000000";
+					cnt_n<="000000";
 				end if;
 				--
 			when OP =>
-				if cnt_r(7 downto 0)<"00001111" then -- This is to load while operating
+				if cnt_r(5 downto 0)<"001111" then -- This is to load while operating
 					load_enable<='1';
 				else
 					load_enable<='0';
@@ -193,14 +186,14 @@ architecture Behavioral of Controller is
 				cnt_n<=cnt_r+1;
 				web_s<="11";
 								--diag_mean
-				if cnt_r="00000011" or cnt_r="00010111" or cnt_r="00101011" or cnt_r="00111111" then
+				if cnt_r="000011" or cnt_r="010111" or cnt_r="101011" or cnt_r="111111" then
 					en_diag<='1';
 				end if;
 				--
 			when SAVE =>
 				enable_MAC<='1';
 				cnt_n<=cnt_r+1;
-				if cnt_r(7 downto 0)<"00001111" then -- This is to load while operating
+				if cnt_r(5 downto 0)<"001111" then -- This is to load while operating
 					load_enable<='1';
 				else
 					load_enable<='0';
