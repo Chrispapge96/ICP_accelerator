@@ -136,7 +136,7 @@ begin
      stimulus: process
      
       
-      file Fin: TEXT open READ_MODE is "C:\Users\Xristos\Documents\GitHub\ICP_accelerator\code\simulation\input_stimuli.txt";
+      file Fin: TEXT open READ_MODE is "/h/d5/t/ch6487pa-s/ICP1/22io_before_synth/Chris_22io/22io_code/simulation/input_stimuli.txt";
 	-----------------------------------------------------------------------------
 	--VARIABLES for reading
 	-----------------------------------------------------------------------------
@@ -174,7 +174,7 @@ begin
              IN_read<='1';
             wait for 2*CLOCK_CYCLE;
             IN_read<='0'; 
-          	wait for 144*CLOCK_CYCLE;
+          	wait for 37*CLOCK_CYCLE;
    			mat:=mat+1;
         end loop;
        
@@ -182,7 +182,7 @@ begin
 
      
        seq: process(clk,rst,read_en,tb_cnt_r) is 
-       		file Fout: TEXT open WRITE_MODE is "C:\Users\Xristos\Documents\GitHub\ICP_accelerator\code\simulation\output.txt";
+       		file Fout: TEXT open WRITE_MODE is "/h/d5/t/ch6487pa-s/ICP1/22io_before_synth/Chris_22io/22io_code/simulation/output.txt";
   			variable write_line_cur: line;
             --variable tb_cnt: integer := 0;
 
@@ -199,7 +199,7 @@ begin
   				load_en<=load_en_n;
   				output_c<=output_n;
   				end if;
-                if outwrite0 > 0 and read_en='1' and  (tb_cnt_r mod 4)=3 then
+                if outwrite0 > 0 and read_en='1' and  ((tb_cnt_r) mod 2)=0 then
                   write(write_line_cur,string'("Element: "));
                   write(write_line_cur,outwrite0,right,10);
                   writeline(Fout,write_line_cur);
@@ -226,7 +226,7 @@ begin
 	            if IN_read='1' and tb_cnt_r=0 then
 	            	IN_data(3 downto 0)<=IN_matrix;
 	            	read_en_n<='1';
-	            elsif (tb_cnt_r=143) then
+	            elsif (tb_cnt_r=37) then
 	            	read_en_n<='0';								--reading
 	            end if;
 
@@ -241,7 +241,7 @@ begin
 			end process;
 			  
 ---------------------------------------------------------------------------------changing input during load	   		
-			outwrite0<=to_integer(unsigned(Out_data & output_c));
+			outwrite0<=to_integer(unsigned( output_c & Out_data ));
 
 
    
