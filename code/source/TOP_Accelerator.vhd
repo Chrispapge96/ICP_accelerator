@@ -212,4 +212,3 @@ END component;
 		   
 end Structural;
 	
-
