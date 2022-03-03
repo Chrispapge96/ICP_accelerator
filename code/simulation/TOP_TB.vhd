@@ -174,14 +174,14 @@ begin
              IN_read<='1';
             wait for 2*CLOCK_CYCLE;
             IN_read<='0'; 
-          	wait for 37*CLOCK_CYCLE;
+          	wait for 144*CLOCK_CYCLE;
    			mat:=mat+1;
         end loop;
        
      end process;
 
      
-       seq: process(clk,rst,read_en,cnt_r) is 
+       seq: process(clk,rst,read_en,tb_cnt_r) is 
        		file Fout: TEXT open WRITE_MODE is "C:\Users\Xristos\Documents\GitHub\ICP_accelerator\code\simulation\output.txt";
   			variable write_line_cur: line;
             --variable tb_cnt: integer := 0;
@@ -199,7 +199,7 @@ begin
   				load_en<=load_en_n;
   				output_c<=output_n;
   				end if;
-                if outwrite0 > 0 and read_en='1' and if (cnt_r mod 2)=1 then
+                if outwrite0 > 0 and read_en='1' and  (tb_cnt_r mod 4)=3 then
                   write(write_line_cur,string'("Element: "));
                   write(write_line_cur,outwrite0,right,10);
                   writeline(Fout,write_line_cur);
@@ -210,6 +210,7 @@ begin
 			comb:process(load_en,tb_cnt_r,stimulus_data,IN_load,load_en,IN_matrix,IN_read,read_en,Out_data) is begin
 				read_en_n<=read_en;
 				load_en_n<=load_en;
+				tb_cnt_n<=0;
 				----------------------------------------------------------------
 				if IN_load='1' and IN_read='0' and tb_cnt_r=0 then
 					load_en_n<='1';
@@ -217,24 +218,22 @@ begin
 					load_en_n<='0';								--loading
 				end if;
 
-				if load_en='1' then
+				if load_en='1' and read_en='0' then
                     tb_cnt_n<=tb_cnt_r+1;
                     IN_data<=stimulus_data((7+8*(tb_cnt_r)) downto ((tb_cnt_r)*8));
-                else
-                	tb_cnt_n<=0;
                 end if;
                 ----------------------------------------------------------------
 	            if IN_read='1' and tb_cnt_r=0 then
 	            	IN_data(3 downto 0)<=IN_matrix;
 	            	read_en_n<='1';
-	            elsif (tb_cnt_r=37) then
+	            elsif (tb_cnt_r=143) then
 	            	read_en_n<='0';								--reading
 	            end if;
 
-            	if read_en='1' then
+            	if read_en='1' and load_en='0' then
             		tb_cnt_n<=tb_cnt_r+1;
-            	else 
-            		tb_cnt_n<=0;
+            	
+            		
             	end if;
             	----------------------------------------------------------------
 	            output_n<=Out_data;

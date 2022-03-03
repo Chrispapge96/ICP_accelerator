@@ -26,11 +26,11 @@ end Controller;
 
 architecture Behavioral of Controller is
  
-	type state_of_operation is (IDLE,OP,LOAD,SAVE,SAVE_last,SAVE_extra,FINISHED,READ);
+	type state_of_operation is (IDLE,OP,LOAD,SAVE,SAVE_last,SAVE_extra,FINISHED,READ,READ_Init);
 	signal state_cur, state_next														: state_of_operation;
 
 	signal addr_ram_r_n,addr_ram_r,addr_ram_w_n,addr_ram_w  :	std_logic_vector(7 downto 0);
-	signal cnt_r,cnt_n 																			: std_logic_vector(5 downto 0);
+	signal cnt_r,cnt_n 																			: std_logic_vector(7 downto 0);
 	signal web_s																						:	std_logic_vector(1 downto 0);
 	--signal IN_matrix_c,IN_matrix_n													: std_logic_vector(3 downto 0);
 	begin
@@ -72,26 +72,37 @@ architecture Behavioral of Controller is
 --------------------------------------------------------------------------------
 	Rotation_of_states: process(IN_read,state_cur,IN_load,cnt_r) is begin
 	   state_next<=state_cur;
+
 		if state_cur=IDLE then
 			if IN_read='1' then
-					state_next<=READ;
+					state_next<=READ_Init;
 			else
 				if IN_load='1' then
 					state_next<=LOAD;
 				end if;
 			end if;
-			--
-		elsif state_cur=READ then
-			if cnt_r(5 downto 0)="100101" then
-				state_next<=IDLE;
+		  --
+		elsif state_cur=READ_Init then
+			if cnt_r(0)='1' then
+				state_next<=READ;
 			else
 				state_next<=state_cur;
 			end if;
 			--
+		elsif state_cur=READ then
+			if cnt_r(7 downto 0)="10001111" then
+				state_next<=IDLE;
+			else
+					if cnt_r(0)='1' then
+						state_next<=READ_Init;
+					else
+						state_next<=state_cur;
+					end if;
+			end if;
+			--
 		elsif state_cur=LOAD then
-			if cnt_r(4 downto 0) <= "1000" then
-				state_next<=OP;
-				cnt_n<="000000";					-----------------------------------------------added this for reseting cnt
+			if cnt_r(4 downto 0) = "10000" then
+				state_next<=OP;						-----------------------------------------------added this for reseting cnt
 			else
 				state_next<=state_cur;
 			end if;
@@ -123,7 +134,9 @@ architecture Behavioral of Controller is
 --------------------------------------------------------------------------------
 --Output of each state
 --------------------------------------------------------------------------------
-	Operation_of_each_state: process(state_cur,addr_ram_r,cnt_r,addr_ram_w,web_s,IN_read,IN_matrix) is begin
+	Operation_of_each_state: process(state_cur,addr_ram_r,cnt_r,addr_ram_w,web_s,IN_read,IN_matrix) is 
+		begin
+		----------------------------------------------------------------------------
 		option<="00";
 		en_diag<='0'; 
 		enable_MAC<='0';
@@ -134,6 +147,9 @@ architecture Behavioral of Controller is
 		cnt_n<=cnt_r;
 		addr_ram_r_n<=addr_ram_r;
 		addr_ram_w_n<=addr_ram_w;
+		----------------------------------------------------------------------------
+		-- 	-- CASES
+		----------------------------------------------------------------------------
 		case state_cur is
 			when IDLE =>
 			  load_enable<='0';
@@ -143,21 +159,32 @@ architecture Behavioral of Controller is
 				if IN_read='1'then
 					addr_ram_r_n <=IN_matrix & IN_matrix(2 downto 0) & '0';-- Because we save 9 rows for each matrix
 				end if;
+
+			when READ_Init =>
+				cnt_n<=cnt_r+1;
+				web_s<="10";									--gives 2 clk for intialization
+				load_enable<='0';
+				addr_ram<=addr_ram_r;
+
 				--
 			when READ =>
 				load_enable<='0';
 				addr_ram<=addr_ram_r;
-				if cnt_r(0)='1' then
-					addr_ram_r_n<=addr_ram_r + '1';
+				if cnt_r(0)='1' then					-- 2 clk because the output is splitted
+				addr_ram_r_n<=addr_ram_r + '1';
 				end if;
 				cnt_n<=cnt_r+1;
 				web_s<="10";
 				--
 			when LOAD =>
 				load_enable<='1';
+				cnt_n<=cnt_r+1;
+				if cnt_r(5 downto 0) = "010000" then
+					cnt_n<="0000000";
+				end if;
 				--
 			when OP =>
-				if cnt_r(5 downto 0)<"001111" then -- This is to load while operating
+				if cnt_r(7 downto 0)<"00001111" then -- This is to load while operating
 					load_enable<='1';
 				else
 					load_enable<='0';
@@ -166,14 +193,14 @@ architecture Behavioral of Controller is
 				cnt_n<=cnt_r+1;
 				web_s<="11";
 								--diag_mean
-				if cnt_r="000011" or cnt_r="010111" or cnt_r="101011" or cnt_r="111111" then
+				if cnt_r="00000011" or cnt_r="00010111" or cnt_r="00101011" or cnt_r="00111111" then
 					en_diag<='1';
 				end if;
 				--
 			when SAVE =>
 				enable_MAC<='1';
 				cnt_n<=cnt_r+1;
-				if cnt_r(5 downto 0)<"001111" then -- This is to load while operating
+				if cnt_r(7 downto 0)<"00001111" then -- This is to load while operating
 					load_enable<='1';
 				else
 					load_enable<='0';

@@ -58,9 +58,9 @@ begin
         if load_enable = '1' then
             addr_load_n<=addr_load_c + 1;
             if addr_load_c(0)='0' then
-                data_n(to_integer(unsigned(addr_load_c(3 downto 0)))) <= data_r(to_integer(unsigned(addr_load_c(3 downto 0)))) & IN_data;
+                data_n(to_integer(unsigned(addr_load_c(4 downto 1)))) <= data_r(to_integer(unsigned(addr_load_c(4 downto 1))))(15 downto 8) & IN_data;
             else
-                data_n(to_integer(unsigned(addr_load_c(3 downto 0)))) <= IN_data & data_r(to_integer(unsigned(addr_load_c(3 downto 0))));
+                data_n(to_integer(unsigned(addr_load_c(4 downto 1)))) <= IN_data & data_r(to_integer(unsigned(addr_load_c(4 downto 1))))(7 downto 0);
             end if;
         else
             addr_load_n<=addr_load_c;
