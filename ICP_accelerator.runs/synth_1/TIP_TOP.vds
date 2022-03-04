@@ -2,8 +2,8 @@
 # Vivado v2021.1 (64-bit)
 # SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
 # IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
-# Start of session at: Wed Mar  2 19:13:01 2022
-# Process ID: 3088
+# Start of session at: Fri Mar  4 22:35:47 2022
+# Process ID: 18048
 # Current directory: C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.runs/synth_1
 # Command line: vivado.exe -log TIP_TOP.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source TIP_TOP.tcl
 # Log file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.runs/synth_1/TIP_TOP.vds
@@ -16,38 +16,38 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7k70t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k70t'
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 11504
+INFO: [Synth 8-7075] Helper process launched with PID 19252
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Starting Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'TIP_TOP' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:40]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad0' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:91]
+INFO: [Synth 8-638] synthesizing module 'TIP_TOP' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:40]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad0' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:91]
 INFO: [Synth 8-6157] synthesizing module 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14]
 INFO: [Synth 8-6155] done synthesizing module 'CPAD_S_74x50u_IN' (1#1) [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad1' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:98]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad2' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:105]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad3' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:112]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad4' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:119]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad5' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:126]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad6' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:133]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad7' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:140]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'clk_pad' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:147]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'load_pad' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:154]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'read_pad' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:161]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'rst_pad' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:168]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad0' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:180]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad1' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:98]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad2' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:105]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad3' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:112]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad4' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:119]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad5' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:126]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad6' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:133]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'inpad7' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:140]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'clk_pad' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:147]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'load_pad' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:154]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'read_pad' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:161]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_IN' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:14' bound to instance 'rst_pad' of component 'CPAD_S_74x50u_IN' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:168]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad0' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:180]
 INFO: [Synth 8-6157] synthesizing module 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41]
 INFO: [Synth 8-6155] done synthesizing module 'CPAD_S_74x50u_OUT' (2#1) [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad1' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:187]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad2' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:194]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad3' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:201]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad4' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:208]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad5' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:215]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad6' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:222]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad7' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:229]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad8' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:236]
-INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Finish_bit' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:244]
-INFO: [Synth 8-3491] module 'TOP_Accelerator' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_Accelerator.vhd:16' bound to instance 'top_ac' of component 'TOP_Accelerator' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:255]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad1' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:187]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad2' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:194]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad3' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:201]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad4' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:208]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad5' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:215]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad6' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:222]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad7' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:229]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Outpad8' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:236]
+INFO: [Synth 8-3491] module 'CPAD_S_74x50u_OUT' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/PADS_Jun2013.v:41' bound to instance 'Finish_bit' of component 'CPAD_S_74x50u_OUT' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:244]
+INFO: [Synth 8-3491] module 'TOP_Accelerator' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_Accelerator.vhd:16' bound to instance 'top_ac' of component 'TOP_Accelerator' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:255]
 INFO: [Synth 8-638] synthesizing module 'TOP_Accelerator' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_Accelerator.vhd:29]
 INFO: [Synth 8-3491] module 'Controller' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:6' bound to instance 'contr' of component 'Controller' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_Accelerator.vhd:135]
 INFO: [Synth 8-638] synthesizing module 'Controller' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:27]
@@ -61,19 +61,17 @@ INFO: [Synth 8-256] done synthesizing module 'MAC' (5#1) [C:/Users/Xristos/Docum
 INFO: [Synth 8-3491] module 'Input_Matrix' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Input_matrix.vhd:9' bound to instance 'input_matrix_inst' of component 'Input_Matrix' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_Accelerator.vhd:176]
 INFO: [Synth 8-638] synthesizing module 'Input_Matrix' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Input_matrix.vhd:24]
 	Parameter WORD_LENGTH bound to: 16 - type: integer 
-WARNING: [Synth 8-421] mismatched array sizes in rhs and lhs of assignment [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Input_matrix.vhd:61]
-WARNING: [Synth 8-421] mismatched array sizes in rhs and lhs of assignment [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Input_matrix.vhd:63]
 INFO: [Synth 8-256] done synthesizing module 'Input_Matrix' (6#1) [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Input_matrix.vhd:24]
 INFO: [Synth 8-3491] module 'ST_SPHDL_160x32m8_L' declared at 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/RAM_160x32.vhd:5' bound to instance 'RAM' of component 'ST_SPHDL_160x32m8_L' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_Accelerator.vhd:185]
 INFO: [Synth 8-638] synthesizing module 'ST_SPHDL_160x32m8_L' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/RAM_160x32.vhd:55]
 INFO: [Synth 8-256] done synthesizing module 'ST_SPHDL_160x32m8_L' (7#1) [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/RAM_160x32.vhd:55]
 INFO: [Synth 8-256] done synthesizing module 'TOP_Accelerator' (8#1) [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_Accelerator.vhd:29]
-INFO: [Synth 8-256] done synthesizing module 'TIP_TOP' (9#1) [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd:40]
+INFO: [Synth 8-256] done synthesizing module 'TIP_TOP' (9#1) [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd:40]
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
@@ -81,25 +79,10 @@ Start Loading Part and Timing Information
 Loading part: xc7k70tfbv676-1
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7k70tfbv676-1
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-802] inferred FSM for state register 'state_cur_reg' in module 'Controller'
----------------------------------------------------------------------------------------------------
-                   State |                     New Encoding |                Previous Encoding 
----------------------------------------------------------------------------------------------------
-                 iSTATE5 |                              000 |                              000
-                 iSTATE2 |                              001 |                              111
-                 iSTATE1 |                              010 |                              010
-                  iSTATE |                              011 |                              001
-                 iSTATE4 |                              100 |                              101
-*
-                 iSTATE6 |                              101 |                              110
-                 iSTATE3 |                              110 |                              011
----------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'state_cur_reg' using encoding 'sequential' in module 'Controller'
-WARNING: [Synth 8-327] inferring latch for variable 'cnt_n_reg' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:50]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 No constraint files found.
 ---------------------------------------------------------------------------------
@@ -116,20 +99,24 @@ Detailed RTL Component Info :
 	                8 Bit    Registers := 2     
 	                6 Bit    Registers := 1     
 	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
 +---Muxes : 
 	   2 Input   18 Bit        Muxes := 3     
-	   2 Input   16 Bit        Muxes := 16    
+	   2 Input   16 Bit        Muxes := 1     
 	   2 Input    9 Bit        Muxes := 1     
-	   7 Input    8 Bit        Muxes := 2     
-	   7 Input    6 Bit        Muxes := 1     
-	   7 Input    3 Bit        Muxes := 1     
+	  10 Input    8 Bit        Muxes := 2     
+	  10 Input    6 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 1     
+	   6 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 1     
+	   4 Input    3 Bit        Muxes := 1     
 	   6 Input    3 Bit        Muxes := 1     
-	   2 Input    3 Bit        Muxes := 3     
-	   7 Input    2 Bit        Muxes := 2     
-	   2 Input    1 Bit        Muxes := 19    
-	   7 Input    1 Bit        Muxes := 7     
-	   4 Input    1 Bit        Muxes := 2     
+	  10 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 17    
+	  10 Input    1 Bit        Muxes := 8     
 	   3 Input    1 Bit        Muxes := 1     
+	   8 Input    1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -147,20 +134,20 @@ No constraint files found.
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 No constraint files found.
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Timing Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Technology Mapping : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -178,56 +165,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished IO Insertion : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[5] with 1st driver pin 'cnt_r[5]_i_1/O' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:46]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[5] with 2nd driver pin 'top_ac/contr/cnt_n_reg[5]/Q' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:50]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[4] with 1st driver pin 'cnt_r[4]_i_1/O' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:46]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[4] with 2nd driver pin 'top_ac/contr/cnt_n_reg[4]/Q' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:50]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[3] with 1st driver pin 'cnt_r[3]_i_1/O' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:46]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[3] with 2nd driver pin 'top_ac/contr/cnt_n_reg[3]/Q' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:50]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[2] with 1st driver pin 'cnt_r[2]_i_1/O' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:46]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[2] with 2nd driver pin 'top_ac/contr/cnt_n_reg[2]/Q' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:50]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[1] with 1st driver pin 'cnt_r[1]_i_1/O' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:46]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[1] with 2nd driver pin 'top_ac/contr/cnt_n_reg[1]/Q' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:50]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[0] with 1st driver pin 'cnt_r[0]_i_1/O' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:46]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin top_ac/contr/cnt_n[0] with 2nd driver pin 'top_ac/contr/cnt_n_reg[0]/Q' [C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/Controller.vhd:50]
-
-Report Check Netlist: 
-+------+------------------+-------+---------+-------+------------------+
-|      |Item              |Errors |Warnings |Status |Description       |
-+------+------------------+-------+---------+-------+------------------+
-|1     |multi_driven_nets |      0|        6|Failed |Multi driven nets |
-+------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -247,53 +215,50 @@ Report Cell Usage:
 |1     |ST_SPHDL_160x32m8_L |     1|
 |2     |BUFG                |     1|
 |3     |CARRY4              |    34|
-|4     |LUT1                |     3|
+|4     |LUT1                |     2|
 |5     |LUT2                |    36|
-|6     |LUT3                |    55|
+|6     |LUT3                |    44|
 |7     |LUT4                |    59|
-|8     |LUT5                |   138|
-|9     |LUT6                |   198|
+|8     |LUT5                |   135|
+|9     |LUT6                |   212|
 |10    |MUXF7               |    64|
-|11    |MUXF8               |    24|
-|12    |FDRE                |   341|
-|13    |LD                  |     6|
-|14    |IBUF                |    12|
-|15    |OBUF                |    10|
+|11    |MUXF8               |    16|
+|12    |FDRE                |   343|
+|13    |IBUF                |    12|
+|14    |OBUF                |    10|
 +------+--------------------+------+
 
 Report Instance Areas: 
 +------+----------------------+----------------+------+
 |      |Instance              |Module          |Cells |
 +------+----------------------+----------------+------+
-|1     |top                   |                |  1014|
-|2     |  top_ac              |TOP_Accelerator |   991|
-|3     |    contr             |Controller      |   284|
-|4     |    input_matrix_inst |Input_Matrix    |   513|
+|1     |top                   |                |  1001|
+|2     |  top_ac              |TOP_Accelerator |   978|
+|3     |    contr             |Controller      |   277|
+|4     |    input_matrix_inst |Input_Matrix    |   507|
 |5     |    mac_inst          |MAC             |   161|
 +------+----------------------+----------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1136.145 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 12 critical warnings and 3 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1137.648 ; gain = 0.000
-Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1136.145 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1136.145 ; gain = 0.000
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.028 . Memory (MB): peak = 1137.648 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 128 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.019 . Memory (MB): peak = 1136.145 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 114 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1137.648 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1136.145 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 6 instances were transformed.
-  LD => LDCE: 6 instances
+No Unisim elements were transformed.
 
-Synth Design complete, checksum: 91a1e24b
+Synth Design complete, checksum: 629e6353
 INFO: [Common 17-83] Releasing license: Synthesis
-60 Infos, 3 Warnings, 12 Critical Warnings and 0 Errors encountered.
+58 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 1137.648 ; gain = 0.000
-INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+synth_design: Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 1136.145 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.runs/synth_1/TIP_TOP.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file TIP_TOP_utilization_synth.rpt -pb TIP_TOP_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed Mar  2 19:13:37 2022...
+INFO: [Common 17-206] Exiting Vivado at Fri Mar  4 22:36:16 2022...

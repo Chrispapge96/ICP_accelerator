@@ -76,8 +76,8 @@ begin
             sum0    <= std_logic_vector(  unsigned("00" & mul0) + unsigned("00" & mul1)  );
             mac_n   <= std_logic_vector(  unsigned(sum0) + unsigned(mac)  );
 
-            if max_c<mac_n then
-                max_n<=mac_n;
+            if max_c<mac_r then
+                max_n<=mac_r;
             else
                 max_n<=max_c;
             end if;

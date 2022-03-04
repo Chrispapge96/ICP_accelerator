@@ -70,6 +70,10 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param checkpoint.writeSynthRtdsInDcp 1
+set_param synth.incrementalSynthesisCache C:/Users/Xristos/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-13728-DESKTOP-27BCK94/incrSyn
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7k70tfbv676-1
 
@@ -92,7 +96,7 @@ read_vhdl -library xil_defaultlib {
   C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/RAM_160x32.vhd
   C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/ROM.vhd
   C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_Accelerator.vhd
-  C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TOP_TOP.vhd
+  C:/Users/Xristos/Documents/GitHub/ICP_accelerator/code/source/TIP_TOP.vhd
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

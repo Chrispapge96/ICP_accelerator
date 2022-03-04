@@ -1,12 +1,12 @@
 #-----------------------------------------------------------
-# Vivado v2021.1.1 (64-bit)
-# SW Build 3286242 on Wed Jul 28 13:09:46 MDT 2021
-# IP Build 3279568 on Wed Jul 28 16:48:48 MDT 2021
-# Start of session at: Sun Jan 30 15:20:12 2022
-# Process ID: 33378
-# Current directory: /home/dell/Documents/Vivado/ICP_accelerator/ICP_accelerator.runs/synth_1
-# Command line: vivado -log TOP_Accelerator.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source TOP_Accelerator.tcl
-# Log file: /home/dell/Documents/Vivado/ICP_accelerator/ICP_accelerator.runs/synth_1/TOP_Accelerator.vds
-# Journal file: /home/dell/Documents/Vivado/ICP_accelerator/ICP_accelerator.runs/synth_1/vivado.jou
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Fri Mar  4 22:35:47 2022
+# Process ID: 18048
+# Current directory: C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.runs/synth_1
+# Command line: vivado.exe -log TIP_TOP.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source TIP_TOP.tcl
+# Log file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.runs/synth_1/TIP_TOP.vds
+# Journal file: C:/Users/Xristos/Documents/GitHub/ICP_accelerator/ICP_accelerator.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
-source TOP_Accelerator.tcl -notrace
+source TIP_TOP.tcl -notrace
