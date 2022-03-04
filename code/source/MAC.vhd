@@ -83,7 +83,7 @@ begin
             end if;
 
             if en_diag='1' then
-                diag_sum_n<=std_logic_vector(unsigned(diag_sum_c)+ unsigned("00" & mac_n));
+                diag_sum_n<=std_logic_vector(unsigned(diag_sum_c)+ unsigned("00" & mac_c));
             end if;
 
             
