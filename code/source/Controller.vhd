@@ -119,6 +119,7 @@ architecture Behavioral of Controller is
 			--
 		elsif state_cur<=SAVE_extra then
 				state_next<=FINISHED;
+			--
 		elsif state_cur=FINISHED then
 			state_next<=IDLE;
 		end if;
@@ -162,7 +163,7 @@ architecture Behavioral of Controller is
 				--
 			when READ =>
 				load_enable<='0';
-				addr_ram<=addr_ram_r;
+				addr_ram<=addr_ram_r; 
 				if cnt_r(0)='1' then					-- 2 clk because the output is splitted
 				addr_ram_r_n<=addr_ram_r + '1';
 				end if;
@@ -186,7 +187,7 @@ architecture Behavioral of Controller is
 				cnt_n<=cnt_r+1;
 				web_s<="11";
 								--diag_mean
-				if cnt_r="000011" or cnt_r="010111" or cnt_r="101011" or cnt_r="111111" then
+				if cnt_r="000100" or cnt_r="011000" or cnt_r="101100"  then
 					en_diag<='1';
 				end if;
 				--
@@ -203,6 +204,7 @@ architecture Behavioral of Controller is
 			 	rst_sumReg<='1';	
 			 	--
 			when SAVE_last =>
+				en_diag<='1';
 				load_enable<='0';
 			  enable_MAC<='1';
 				cnt_n<=cnt_r+1;
