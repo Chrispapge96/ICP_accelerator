@@ -87,7 +87,7 @@ architecture Behavioral of Controller is
 
 			--
 		elsif state_cur=READ then
-			if cnt_r(5 downto 0)="100101" then
+			if cnt_r(5 downto 0)="100100" then
 				state_next<=IDLE;
 			else
 				state_next<=state_cur;
@@ -103,7 +103,7 @@ architecture Behavioral of Controller is
 		elsif state_cur=OP then
 		  if cnt_r(1 downto 0)="11" then
 			if cnt_r(5 downto 0)="111111" then
-				state_next<=SAVE_extra;
+				state_next<=SAVE_last;
 			else
 				state_next<=SAVE;
 			end if;
@@ -187,9 +187,7 @@ architecture Behavioral of Controller is
 				cnt_n<=cnt_r+1;
 				web_s<="11";
 								--diag_mean
-				if cnt_r="000100" or cnt_r="011000" or cnt_r="101100"  then
-					en_diag<='1';
-				end if;
+				
 				--
 			when SAVE =>
 				enable_MAC<='1';
@@ -198,6 +196,9 @@ architecture Behavioral of Controller is
 					load_enable<='1';
 				else
 					load_enable<='0';
+				end if;
+				if cnt_r="000100" or cnt_r="011000" or cnt_r="101100"  then
+					en_diag<='1';
 				end if;
 			 	web_s<="00";
 				addr_ram_w_n<=addr_ram_w + 1;
