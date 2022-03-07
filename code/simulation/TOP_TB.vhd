@@ -28,7 +28,7 @@ architecture Structural of TB_TIP_TOP is
 	signal output_c,output_n:	std_logic_vector(8 downto 0);
 	signal finito:     			std_logic:='0';
 	signal load_en,load_en_n,read_en,read_en_n:			std_logic:='0';
-	signal tb_cnt_r,tb_cnt_n:	integer:=0;
+	signal tb_cnt_r,tb_cnt_n,read_cnt,read_cnt_n:	integer:=0;
 
     signal outwrite0,outwrite1                           : integer:= 0;
 
@@ -136,7 +136,7 @@ begin
      stimulus: process
      
       
-      file Fin: TEXT open READ_MODE is "/h/d5/t/ch6487pa-s/ICP1/22io_before_synth/Chris_22io/22io_code/simulation/input_stimuli.txt";
+      file Fin: TEXT open READ_MODE is "/h/d5/t/ch6487pa-s/ICP1/22io_before_synth/Chris_22io/code/simulation/input_stimuli.txt";
 	-----------------------------------------------------------------------------
 	--VARIABLES for reading
 	-----------------------------------------------------------------------------
@@ -181,8 +181,8 @@ begin
      end process;
 
      
-       seq: process(clk,rst,read_en,tb_cnt_r) is 
-       		file Fout: TEXT open WRITE_MODE is "/h/d5/t/ch6487pa-s/ICP1/22io_before_synth/Chris_22io/22io_code/simulation/output.txt";
+       seq: process(clk,rst,read_en,read_cnt) is 
+       		file Fout: TEXT open WRITE_MODE is "/h/d5/t/ch6487pa-s/ICP1/22io_before_synth/Chris_22io/code/simulation/output.txt";
   			variable write_line_cur: line;
             --variable tb_cnt: integer := 0;
 
@@ -190,16 +190,18 @@ begin
   			if rising_edge(clk) then
   				if rst='1' then
   				tb_cnt_r<=0;
+				read_cnt<=0;
   				load_en<='0';
   				read_en<='0';
   				output_c<=(others=>'0');
   				else
   				tb_cnt_r<=tb_cnt_n;
+				read_cnt<=read_cnt_n;
   				read_en<=read_en_n;
   				load_en<=load_en_n;
   				output_c<=output_n;
   				end if;
-                if outwrite0 > 0 and read_en='1' and  ((tb_cnt_r) mod 2)=0 then
+                if outwrite0 > 0 and read_en='1' and  ((read_cnt) mod 2)=1 then
                   write(write_line_cur,string'("Element: "));
                   write(write_line_cur,outwrite0,right,10);
                   writeline(Fout,write_line_cur);
@@ -207,10 +209,11 @@ begin
 	        end if;
 			end process;
 
-			comb:process(load_en,tb_cnt_r,stimulus_data,IN_load,load_en,IN_matrix,IN_read,read_en,Out_data) is begin
+			comb:process(load_en,tb_cnt_r,stimulus_data,IN_load,load_en,IN_matrix,IN_read,read_en,Out_data,read_cnt) is begin
 				read_en_n<=read_en;
 				load_en_n<=load_en;
 				tb_cnt_n<=0;
+				read_cnt_n<=0;
 				----------------------------------------------------------------
 				if IN_load='1' and IN_read='0' and tb_cnt_r=0 then
 					load_en_n<='1';
@@ -226,12 +229,13 @@ begin
 	            if IN_read='1' and tb_cnt_r=0 then
 	            	IN_data(3 downto 0)<=IN_matrix;
 	            	read_en_n<='1';
-	            elsif (tb_cnt_r=37) then
-	            	read_en_n<='0';								--reading
+	            elsif (read_cnt=37) then
+	            	read_en_n<='0';
+			IN_data<=stimulus_data((7+8*(tb_cnt_r)) downto ((tb_cnt_r)*8));								--reading
 	            end if;
 
             	if read_en='1' and load_en='0' then
-            		tb_cnt_n<=tb_cnt_r+1;
+            		read_cnt_n<=read_cnt+1;
             	
             		
             	end if;
@@ -241,7 +245,7 @@ begin
 			end process;
 			  
 ---------------------------------------------------------------------------------changing input during load	   		
-			outwrite0<=to_integer(unsigned( output_c & Out_data ));
+			outwrite0<=to_integer(unsigned(  output_c & Out_data ));
 
 
    
